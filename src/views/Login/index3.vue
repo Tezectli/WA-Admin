@@ -29,7 +29,7 @@
               <el-input v-model.number="ruleForm.code" minlength="6" maxlength="6"></el-input>
             </el-col>
             <el-col :span="9">
-              <el-button type="success" class="block" @click="getsms()">获取验证码</el-button>
+              <el-button type="success" class="block">获取验证码</el-button>
             </el-col>
           </el-row>
         </el-form-item>
@@ -42,8 +42,6 @@
   </div>
 </template>
 <script>
-import {GetSms} from '@/api/login'
-import{xxx} from '@/api/login.js'
 import {
   stripscript,
   validataEmail,
@@ -148,19 +146,10 @@ export default {
       });
     };
     /**
-     * 获取验证码
-     */
-    const getsms = (()=>{
-      GetSms()
-    })
-    /**
      * 生命周期
      */
     //挂载完成后
-    onMounted(() => {
-      console.log(process.env.VUE_APP_ABC)
-      
-    })
+    onMounted(() => {});
 
     return {
       menuTab,
@@ -168,8 +157,7 @@ export default {
       toggleMneu,
       submitForm,
       ruleForm,
-      rules,
-      getsms
+      rules
     };
   }
 };

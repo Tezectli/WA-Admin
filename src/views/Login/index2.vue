@@ -29,7 +29,7 @@
               <el-input v-model.number="ruleForm.code" minlength="6" maxlength="6"></el-input>
             </el-col>
             <el-col :span="9">
-              <el-button type="success" class="block" @click="getsms()">获取验证码</el-button>
+              <el-button type="success" class="block">获取验证码</el-button>
             </el-col>
           </el-row>
         </el-form-item>
@@ -42,22 +42,18 @@
   </div>
 </template>
 <script>
-import {GetSms} from '@/api/login'
-import{xxx} from '@/api/login.js'
 import {
   stripscript,
   validataEmail,
   validataPass,
   validataVcode
 } from "@/utils/validates";
-import { reactive, ref, isRef, toRefs, onMounted } from "@vue/composition-api";
 export default {
   name: "login",
-  setup(prop, context) {
-    //函数
-    let validateCode = (rule, value, callback) => {
+  data() {
+    var validateCode = (rule, value, callback) => {
       // this.ruleForm.code = stripscript(value)
-      value = ruleForm.code;
+      value = this.ruleForm.code;
       if (!value) {
         return callback(new Error("请输入验证码"));
       } else if (validataVcode(value)) {
@@ -67,7 +63,7 @@ export default {
       }
     };
     //下为验证用户名是否为邮箱的方法：validateusername
-    let validateusername = (rule, value, callback) => {
+    var validateusername = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入用户名"));
       } else if (validataEmail(value)) {
@@ -77,9 +73,9 @@ export default {
       }
     };
     //下为验证密码是否符合格式的方法
-    let validatePassword = (rule, value, callback) => {
-      ruleForm.password = stripscript(value);
-      value = ruleForm.password;
+    var validatePassword = (rule, value, callback) => {
+      this.ruleForm.password = stripscript(value);
+      value = this.ruleForm.password;
       if (value === "") {
         callback(new Error("请输入密码"));
       } else if (validataPass(value)) {
@@ -89,56 +85,53 @@ export default {
       }
     };
     //下为验证**重复**密码是否符合格式的方法
-    let validatePasswords = (rule, value, callback) => {
-      if (model.value === "login") {
+    var validatePasswords = (rule, value, callback) => {
+      if (this.model === "login") {
         callback();
       }
-      ruleForm.passwords = stripscript(value);
-      value = ruleForm.passwords;
+      this.ruleForm.passwords = stripscript(value);
+      value = this.ruleForm.passwords;
       if (value === "") {
         callback(new Error("请再次输入密码"));
-      } else if (value != ruleForm.password) {
+      } else if (value != this.ruleForm.password) {
         callback(new Error("重复密码不正确 请再次输入"));
       } else {
         callback();
       }
     };
-    //主要放置dota数据，生命周期，自定义函数
-    const menuTab = reactive([
-      { txt: "登录", current: false, type: "login" },
-      { txt: "注册", current: true, type: "register" }
-    ]);
-    // 模块值
-    const model = ref("login");
-    //表单绑定数据
-    const ruleForm = reactive({
-      username: "",
-      password: "",
-      passwords: "",
-      code: ""
-    });
-    //表单验证数据
-    const rules = reactive({
-      username: [{ validator: validateusername, trigger: "blur" }],
-      password: [{ validator: validatePassword, trigger: "blur" }],
-      passwords: [{ validator: validatePasswords, trigger: "blur" }],
-      code: [{ validator: validateCode, trigger: "blur" }]
-    });
-    /**
-     * 声明函数
-     */
-    const toggleMneu = data => {
-      console.log(data);
-
-      menuTab.forEach((elem, index) => {
+    return {
+      menuTab: [
+        { txt: "登录", current: false, type: "login" },
+        { txt: "注册", current: true, type: "register" }
+      ],
+      model: "register",
+      // isActive:true
+      //以下为表单数据
+      ruleForm: {
+        username: "",
+        password: "",
+        passwords: "",
+        code: ""
+      },
+      rules: {
+        username: [{ validator: validateusername, trigger: "blur" }],
+        password: [{ validator: validatePassword, trigger: "blur" }],
+        passwords: [{ validator: validatePasswords, trigger: "blur" }],
+        code: [{ validator: validateCode, trigger: "blur" }]
+      }
+    };
+  },
+  methods: {
+    toggleMneu(data) {
+      this.menuTab.forEach((elem, index) => {
         elem.current = false;
       });
       data.current = true;
       //登录注册切换 修改模块值
-      model.value = data.type;
-    };
-    const submitForm = formName => {
-      context.refs[formName].validate(valid => {
+      this.model = data.type;
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
         if (valid) {
           alert("submit!");
         } else {
@@ -146,31 +139,7 @@ export default {
           return false;
         }
       });
-    };
-    /**
-     * 获取验证码
-     */
-    const getsms = (()=>{
-      GetSms()
-    })
-    /**
-     * 生命周期
-     */
-    //挂载完成后
-    onMounted(() => {
-      console.log(process.env.VUE_APP_ABC)
-      
-    })
-
-    return {
-      menuTab,
-      model,
-      toggleMneu,
-      submitForm,
-      ruleForm,
-      rules,
-      getsms
-    };
+    }
   }
 };
 </script>
