@@ -1,4 +1,5 @@
-# vue-admin2
+# W&A商城后台管理
+目前已连接数据库
 
 ## Project setup
 ```
