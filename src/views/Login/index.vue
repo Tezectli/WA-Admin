@@ -2,14 +2,14 @@
   <div id="login">
     <div class="login-wrap">
       <ul class="menu-tap">
-        <li v-for="item in menuTab" :key="item.id" :class="{'current': item.current}" @click="toggleMneu(item)">
+        <li v-for="item in menuTab" :key="item.id" :class="{'current': item.current}" @click="toggleMenu(item)">
           {{item.txt}}</li>
       </ul>
-      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="login-form" size="medium">
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="loginForm" class="login-form" size="medium">
 
         <el-form-item prop="username" class="item-form">
-          <label>邮箱</label>
-          <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
+          <label for="mail">邮箱</label>
+          <el-input type="text" v-model="ruleForm.username" autocomplete="off" id="mail"></el-input>
         </el-form-item>
 
         <el-form-item prop="password" class="item-form">
@@ -35,15 +35,18 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button type="danger" @click="submitForm('ruleForm')" class="login-btn block">提交</el-button>
+          <el-button type="danger" @click="submitForm('loginForm')" class="login-btn block"
+            :disabled="loginButtonStatus">{{model==='login' ? "登录" : "注册"}}</el-button>
         </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
 <script>
-import {GetSms} from '@/api/login'
-import{xxx} from '@/api/login.js'
+// import {Message} from 'element-ui';
+import qs from "qs";
+import { GetSms, Register, Login } from "@/api/login";
+// import{xxx} from '@/api/login.js'
 import {
   stripscript,
   validataEmail,
@@ -53,7 +56,7 @@ import {
 import { reactive, ref, isRef, toRefs, onMounted } from "@vue/composition-api";
 export default {
   name: "login",
-  setup(prop, context) {
+  setup(prop, { refs, root }) {
     //函数
     let validateCode = (rule, value, callback) => {
       // this.ruleForm.code = stripscript(value)
@@ -68,13 +71,13 @@ export default {
     };
     //下为验证用户名是否为邮箱的方法：validateusername
     let validateusername = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入用户名"));
-      } else if (validataEmail(value)) {
-        callback(new Error("用户名格式错误"));
-      } else {
-        callback();
-      }
+      // if (value === "") {
+      //   callback(new Error("请输入用户名"));
+      // } else if (validataEmail(value)) {
+      //   callback(new Error("用户名格式错误"));
+      // } else {
+      callback();
+      // }
     };
     //下为验证密码是否符合格式的方法
     let validatePassword = (rule, value, callback) => {
@@ -103,10 +106,12 @@ export default {
         callback();
       }
     };
+
+    /*----------------分-----------------------*/
     //主要放置dota数据，生命周期，自定义函数
     const menuTab = reactive([
-      { txt: "登录", current: false, type: "login" },
-      { txt: "注册", current: true, type: "register" }
+      { txt: "登录", current: true, type: "login" },
+      { txt: "注册", current: false, type: "register" }
     ]);
     // 模块值
     const model = ref("login");
@@ -124,10 +129,11 @@ export default {
       passwords: [{ validator: validatePasswords, trigger: "blur" }],
       code: [{ validator: validateCode, trigger: "blur" }]
     });
+    const loginButtonStatus = ref(false);
     /**
      * 声明函数
      */
-    const toggleMneu = data => {
+    const toggleMenu = data => {
       console.log(data);
 
       menuTab.forEach((elem, index) => {
@@ -136,48 +142,128 @@ export default {
       data.current = true;
       //登录注册切换 修改模块值
       model.value = data.type;
+      //重置表单
+      // refs:(...) == this.$refs
+      // this.$refs[loginForm].resetFields(); -------->此为2.0写法
+      // refs.loginForm.resetFields();---------------->3.0写法的另一种方法
+      refs["loginForm"].resetFields();
     };
     const submitForm = formName => {
-      context.refs[formName].validate(valid => {
+      console.log(model.value);
+
+      refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          model.value === "login" ? login() : register();
+          // alert("subm55555it!");
+
+          //   if (model.value === "login") {
+          //     login();
+          //   } else {
+          //     register();
+          //   }
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     };
+    //登录接口
+    const login = () => {
+      let requestData = {
+        account: ruleForm.username,
+        password: ruleForm.password
+      };
+      let postData = qs.stringify({
+        account: ruleForm.username,
+        password: ruleForm.password
+      });
+      console.log(requestData);
+
+      console.log(postData);
+
+      Login(postData)
+        .then(Response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
+    //注册接口
+    const register = () => {
+      let requestData = {
+        account: ruleForm.username,
+        password: ruleForm.password
+      };
+      //数据转换为formdata
+      let postData = qs.stringify({
+        account: ruleForm.username,
+        password: ruleForm.password
+      });
+      console.log(requestData);
+      Register(postData)
+        .then(Response => {
+          console.log(Response);
+          alert("submitsuccess!");
+          toggleMenu(menuTab[0]);
+        })
+        .catch(error => {
+          alert("NO!!submit!");
+          console.log(error);
+        });
+    };
     /**
      * 获取验证码
      */
-    const getsms = (()=>{
-      GetSms()
-    })
+    const getsms = () => {
+      if (ruleForm.username == "") {
+        root.$message.error("邮箱不能为空");
+        return false;
+      }
+      if (validataEmail(ruleForm.username)) {
+        root.$message.error("格式有误！！！");
+        return false;
+      }
+      /**
+       * 下为只传输一个数据的代码与传输多组数据的代码
+       */
+      // GetSms({username:ruleForm.username})
+      let ldata = { username: ruleForm.username };
+      GetSms(ldata);
+
+      // .then(response => {
+      //   console.log(response)
+
+      // }).catch(error => {
+      //   console.log(error)
+      // })
+    };
     /**
      * 生命周期
      */
     //挂载完成后
     onMounted(() => {
-      console.log(process.env.VUE_APP_ABC)
-      
-    })
+      console.log(process.env.VUE_APP_ABC);
+    });
 
     return {
       menuTab,
       model,
-      toggleMneu,
+      toggleMenu,
       submitForm,
       ruleForm,
       rules,
-      getsms
+      getsms,
+      loginButtonStatus
     };
   }
 };
 </script>
 <style lang="scss" scoped>
 #login {
-  height: 100vh;
+  height: 89vh;
   background-color: #344a5f;
+  padding-top: 11vh;
 }
 .login-wrap {
   width: 330px;

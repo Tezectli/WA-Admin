@@ -64,8 +64,8 @@ module.exports = {
         hotOnly: false,
         proxy: {
             '/devapi': {
-                // target: 'http://localhost:8080/Z_web/', //自家登录接口 目标接口域名
-                target: 'http://www.web-jshtml.cn/productapi', //外网测试 目标接口域名
+                target: 'http://localhost:8080/Z_web/', //自家登录接口 目标接口域名
+                // target: 'http://www.web-jshtml.cn/productapi', //外网测试 目标接口域名
                 pathRewrite: {
                     '^/devapi': '' //重写接口
                 },
