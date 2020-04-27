@@ -44,6 +44,7 @@
 </template>
 <script>
 // import {Message} from 'element-ui';
+import sha1 from "js-sha1";
 import qs from "qs";
 import { GetSms, Register, Login } from "@/api/login";
 // import{xxx} from '@/api/login.js'
@@ -171,19 +172,29 @@ export default {
     const login = () => {
       let requestData = {
         account: ruleForm.username,
-        password: ruleForm.password
+        password: sha1(ruleForm.password)
       };
+
       let postData = qs.stringify({
         account: ruleForm.username,
         password: ruleForm.password
       });
       console.log(requestData);
-
       console.log(postData);
-
       Login(postData)
         .then(Response => {
-          console.log(response);
+          //console.log(response);
+          //页面跳转
+          console.log("login good!!!");
+          root.timer = setTimeout(() => {
+            root.$router.push({
+              name: "Console"
+            });
+            console.log("ok");
+          }, 1000);
+          // root.$router.push({
+          //   name: "Console"
+          // });
         })
         .catch(error => {
           console.log(error);
@@ -193,7 +204,7 @@ export default {
     const register = () => {
       let requestData = {
         account: ruleForm.username,
-        password: ruleForm.password
+        password: sha1(ruleForm.password)
       };
       //数据转换为formdata
       let postData = qs.stringify({
