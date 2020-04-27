@@ -1,9 +1,48 @@
 <template>
   <div id="nav-wrap">
-    侧栏
+    <!-- transparent:背景透明 -->
+    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+      :collapse="isCollapse" background-color="transparent" text-color="#fff" active-text-color="#fff" router>
+      <template v-for="(item,index) in routers">
+        <el-submenu v-if="!item.hidden" :key="item.id" :index="index">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span slot="title">{{ item.meta.name }}</span>
+          </template>
+
+          <el-menu-item v-for="subItem in item.children" :key="subItem.id" :index="subItem.path">{{subItem.meta.name}}
+          </el-menu-item>
+          <!-- <el-menu-item index="1-2">选项2</el-menu-item> -->
+        </el-submenu>
+      </template>
+    </el-menu>
   </div>
 </template>
 <script>
+import { reactive, ref, isRef, toRefs, onMounted } from "@vue/composition-api";
+export default {
+  name: "navMenu",
+  setup(props, { root }) {
+    const isCollapse = ref(false);
+    const routers = reactive(root.$router.options.routes);
+    console.log(routers);
+    /**
+     * 下面为定义的函数
+     */
+    const handleOpen = (key, keyPath) => {
+      console.log(key, keyPath);
+    };
+    const handleClose = (key, keyPath) => {
+      console.log(key, keyPath);
+    };
+    return {
+      isCollapse,
+      handleOpen,
+      handleClose,
+      routers
+    };
+  }
+};
 </script>
 <style lang="scss" scoped>
 @import "../../../styles/config.scss";
@@ -15,6 +54,6 @@
   height: 100vh;
   //   border-top-right-radius: 8px;
   //   border-bottom-right-radius: 8px;
-  background-color: #344a5f;
+  background-color: $maincolor;
 }
 </style>
