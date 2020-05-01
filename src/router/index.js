@@ -1,7 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { Icon } from "element-ui";
 //import Home from "../views/Home.vue";
-
+//引入布局组件(默认读取目录的index.vue)
+// import Layout from '@/views/Layout/' -------->也可以这样写（仅限index）
+import Layout from '@/views/Layout/index.vue'
 Vue.use(VueRouter);
 
 const routes = [{
@@ -30,10 +33,10 @@ const routes = [{
         name: "Console",
         redirect: "index",
         meta: {
-            name: "控制台"
+            name: "控制台",
+            icon: 'console'
         },
-        component: () =>
-            import ("../views/Layout/index.vue"),
+        component: Layout,
         children: [{
             path: "/index",
             name: "Index",
@@ -44,15 +47,6 @@ const routes = [{
                 import ("../views/Console/index.vue")
         }]
     },
-    // {
-    //     path: "/about",
-    //     name: "About",
-    //     // route level code-splitting
-    //     // this generates a separate chunk (about.[hash].js) for this route
-    //     // which is lazy-loaded when the route is visited.
-    //     component: () =>
-    //         import ( /* webpackChunkName: "about" */ "../views/About.vue")
-    // }
     /**
      * 信息管理部分----------------------------->
      */
@@ -60,10 +54,10 @@ const routes = [{
         path: "/info",
         name: "Info",
         meta: {
-            name: "信息"
+            name: "信息",
+            icon: "console"
         },
-        component: () =>
-            import ("../views/Layout/index.vue"),
+        component: Layout,
         children: [
 
             {
@@ -93,10 +87,10 @@ const routes = [{
         path: "/User",
         name: "User",
         meta: {
-            name: "用户管理"
+            name: "用户管理",
+            icon: "message"
         },
-        component: () =>
-            import ("../views/Layout/index.vue"),
+        component: Layout,
         children: [
 
             {
