@@ -2,6 +2,10 @@
 目前已连接数据库
 登录注册已完成
 
+主页侧栏、顶栏完成
+
+![](C:\Users\apache\Desktop\20200501.jpg)
+
 ## Project setup
 ```
 npm install
