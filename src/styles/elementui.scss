@@ -11,3 +11,22 @@ li.el-submenu {
         background-color: $sidecolor !important;
     }
 }
+
+.close {
+    .el-submenu {
+        &.is-opened {
+            >.el-submenu__title {
+                background-color: #4baea0 !important;
+            }
+        }
+    }
+}
+
+.el-menu--vertical {
+    .el-menu {
+        background-color: #4baea0 !important;
+    }
+    .el-menu-item:hover {
+        background-color: #ffffff69 !important;
+    }
+}

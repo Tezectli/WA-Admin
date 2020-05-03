@@ -8,3 +8,14 @@ $maincolor:#344a5f;
 $sidecolor:rgb(228, 102, 102);
 //侧栏高度
 $layoutHeader:55px;
+//定义渐变动画
+@mixin webkit($type, $value) {
+    -webkit-#{$type}: $value;
+    -moz-#{$type}: $value;
+    -o-#{$type}: $value;
+    -ms-#{$type}: $value;
+    #{$type}: $value;
+}
+
+//navMenueMin变化的距离
+$navMenueMin:64px;

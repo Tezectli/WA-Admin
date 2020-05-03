@@ -2,8 +2,8 @@
   <div id="nav-wrap">
     <h1 class="logo"><img src="../../../assets/logo.png" alt=""></h1>
     <!-- transparent:背景透明 -->
-    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-      :collapse="isCollapse" background-color="transparent" text-color="#fff" active-text-color="#fff" router>
+    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" :collapse="isCollapse" background-color="transparent"
+      text-color="#fff" active-text-color="#fff" router>
       <template v-for="(item,index) in routers">
         <el-submenu v-if="!item.hidden" :key="item.id" :index="index+''">
           <template slot="title">
@@ -21,26 +21,29 @@
   </div>
 </template>
 <script>
-import { reactive, ref, isRef, toRefs, onMounted } from "@vue/composition-api";
+import {
+  reactive,
+  ref,
+  isRef,
+  toRefs,
+  onMounted,
+  computed
+} from "@vue/composition-api";
 export default {
   name: "navMenu",
   setup(props, { root }) {
-    const isCollapse = ref(false);
+    // const isCollapse = ref(false);
     const routers = reactive(root.$router.options.routes);
-    console.log(routers);
+    /**
+     * 监听header按钮的变化
+     * ES6写法 只有一行不用写花括号 多行需要花括号+return
+     */
+    const isCollapse = computed(() => root.$store.state.isCollapse);
     /**
      * 下面为定义的函数
      */
-    const handleOpen = (key, keyPath) => {
-      console.log(key, keyPath);
-    };
-    const handleClose = (key, keyPath) => {
-      console.log(key, keyPath);
-    };
     return {
       isCollapse,
-      handleOpen,
-      handleClose,
       routers
     };
   }
@@ -54,8 +57,10 @@ export default {
 .logo {
   text-align: center;
   img {
-    margin: 28px auto 25px;
+    // margin: 28px auto 25px;
+    margin: 28px auto;
     width: 75px;
+    @include webkit(transition, all 0.3s ease 0s);
     // box-shadow: 0 3px 16px 0 rgb(0, 0, 0);
     // @include webkit(transition, all 0.3s ease 0s);
   }
@@ -66,14 +71,26 @@ export default {
   left: 0;
   width: $sidemenu;
   height: 100vh;
-  //   border-top-right-radius: 8px;
-  //   border-bottom-right-radius: 8px;
   background-color: $maincolor;
+  @include webkit(transition, all 0.3s ease 0s);
   svg {
     font-size: 18px;
     margin-right: 10px;
     margin-bottom: 2px;
     // margin-left: 10px;
+  }
+}
+.open {
+  #nav-wrap {
+    width: $sidemenu;
+  }
+}
+.close {
+  #nav-wrap {
+    width: $navMenueMin;
+  }
+  .logo img {
+    width: 55%;
   }
 }
 </style>

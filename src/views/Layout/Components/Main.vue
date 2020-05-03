@@ -31,16 +31,24 @@
   padding-right: 30px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  // @include webkit(box-sizing,border-box);
-  // @include webkit(transition, all .3s ease 0s);
+  @include webkit(box-sizing, border-box);
+  @include webkit(transition, all 0.3s ease 0s);
+}
+.open {
+  .main-content {
+    padding-left: $sidemenu + 30;
+  }
+}
+.close {
+  .main-content {
+    padding-left: $navMenueMin + 30;
+  }
 }
 .content {
   width: 100%;
   height: 100%;
   padding: 28px 30px 0 30px;
   background-color: rgb(255, 255, 255);
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  // @include webkit(box-sizing, border-box);
+  @include webkit(box-sizing, border-box);
 }
 </style>
