@@ -38,7 +38,7 @@ export default {
      * 监听header按钮的变化
      * ES6写法 只有一行不用写花括号 多行需要花括号+return
      */
-    const isCollapse = computed(() => root.$store.state.isCollapse);
+    const isCollapse = computed(() => root.$store.state.app.isCollapse);
     /**
      * 下面为定义的函数
      */

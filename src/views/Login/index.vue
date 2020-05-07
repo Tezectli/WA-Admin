@@ -179,9 +179,8 @@ export default {
         account: ruleForm.username,
         password: ruleForm.password
       });
-      console.log(requestData);
-      console.log(postData);
-      Login(postData)
+      root.$store
+        .dispatch("app/login", postData)
         .then(Response => {
           //console.log(response);
           //页面跳转
@@ -199,6 +198,26 @@ export default {
         .catch(error => {
           console.log(error);
         });
+      // console.log(requestData);
+      // console.log(postData);
+      // Login(postData)
+      //   .then(Response => {
+      //     //console.log(response);
+      //     //页面跳转
+      //     console.log("login good!!!");
+      //     root.timer = setTimeout(() => {
+      //       root.$router.push({
+      //         name: "Console"
+      //       });
+      //       console.log("ok");
+      //     }, 1000);
+      //     // root.$router.push({
+      //     //   name: "Console"
+      //     // });
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
     };
     //注册接口
     const register = () => {

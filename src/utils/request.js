@@ -3,7 +3,7 @@ import { Message } from 'element-ui';
 const BASEURL = process.env.NODE_ENV === 'production' ? '' : '/devapi';
 const service = axios.create({
     baseURL: BASEURL,
-    timeout: 1000,
+    timeout: 2000,
     // "content-type": "application/x-www-form-urlencoded"
     // headers: { 'X-Custom-Header': 'foobar' }
     // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
