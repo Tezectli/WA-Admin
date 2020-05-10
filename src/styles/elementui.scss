@@ -30,3 +30,22 @@ li.el-submenu {
         background-color: #ffffff69 !important;
     }
 }
+
+//表格样式
+div.el-table {
+    td,
+    th {
+        text-align: center;
+    }
+    th {
+        font-weight: bold;
+        color: #787f88;
+    }
+}
+
+// .el-table__header {
+//     table-layout: none;
+// }
+body .el-table th.gutter {
+    display: table-cell!important;
+}

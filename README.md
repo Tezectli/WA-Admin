@@ -2,9 +2,9 @@
 目前已连接数据库
 登录注册已完成
 
-主页侧栏、顶栏完成
+首页UI界面完成
 
-![](C:\Users\apache\Desktop\20200501.jpg)
+![](https://s1.ax1x.com/2020/05/10/Y8Rtpt.jpg)
 
 ## Project setup
 ```
