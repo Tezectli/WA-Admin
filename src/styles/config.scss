@@ -19,3 +19,23 @@ $layoutHeader:55px;
 
 //navMenueMin变化的距离
 $navMenueMin:64px;
+//顶栏通用sass样式预设
+
+/*
+*如何使用？
+*假设样式 class="label-wrap key"
+*.label-wrap {
+    &.key { @include labelDom(right,90,40); }
+*/
+
+@mixin labelDom($aligen, $width, $line-height:"normal") {
+    label {
+        float: left;
+        width: $width +px;
+        text-align: $aligen;
+        line-height: $line-height +px;
+    }
+    .wrap-content {
+        margin-left: $width+px;
+    }
+}

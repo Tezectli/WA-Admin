@@ -5,7 +5,7 @@
       <el-row :gutter="13">
         <el-col :span="4">
           <el-form-item label="类型：">
-            <el-select v-model="value" placeholder="请选择" style="width:100px">
+            <el-select v-model="category_value" placeholder="请选择" style="width:100px">
               <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -13,7 +13,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="日期：">
-            <el-date-picker v-model="value2" type="daterange" range-separator="至" start-placeholder="开始日期"
+            <el-date-picker v-model="date_value" type="daterange" range-separator="至" start-placeholder="开始日期"
               end-placeholder="结束日期" style="width:310px">
             </el-date-picker>
           </el-form-item>
@@ -34,7 +34,7 @@
           <el-button type="danger" size="medium">搜索</el-button>
         </el-col>
         <el-col :span="2">
-          <el-button type="danger" size="medium" class="pull-right">新增</el-button>
+          <el-button type="danger" size="medium" class="pull-right" @click="dialog_Info = true">新增</el-button>
         </el-col>
       </el-row>
     </el-form>
@@ -52,7 +52,8 @@
       <el-table-column prop="store" label="商品库存" width="140">
       </el-table-column>
       <el-table-column label="操作">
-        <template slot-scope="scope">
+        <!-- <template slot-scope="scope"> -->
+        <template>
           <el-button size="mini">编辑</el-button>
           <el-button size="mini" type="danger">删除</el-button>
         </template>
@@ -70,13 +71,34 @@
         </el-pagination>
       </el-col>
     </el-row>
+
+    <!-- 弹窗 -->
+    <!-- 需要修改逻辑处理的话可以使用回调函数，不涉及的话可以用修饰器 -->
+    <!-- <DialogInfo :flag.sync="dialog_Info" @close="closeDialog" /> -->
+    <DialogInfo :flag.sync="dialog_Info" />
+
   </div>
 </template>
 <script>
+import DialogInfo from "./dialog/info";
 import { reactive, ref } from "@vue/composition-api";
 export default {
   name: "infoIndex",
+  components: { DialogInfo },
   setup(props) {
+    //非reative数据
+    //弹窗
+    const dialog_Info = ref(false);
+    const category_value = ref("");
+    const date_value = ref("");
+    const search_key = ref("id");
+    const search_keyWork = ref("");
+    //分页数据
+    const handleSizeChange = val => {};
+    const handleCurrentChange = val => {};
+    /**
+    数据
+     */
     const options = reactive([
       {
         value: 1,
@@ -101,7 +123,9 @@ export default {
         label: "ID"
       }
     ]);
+
     //表格数据
+
     const tableData = reactive([
       {
         name: "抱枕1",
@@ -128,23 +152,18 @@ export default {
         store: "99"
       }
     ]);
-    const value = ref("");
-    const value2 = ref("");
-    const search_key = ref("id");
-    const search_keyWork = ref("");
-    //分页数据
-    const handleSizeChange = val => {};
-    const handleCurrentChange = val => {};
     return {
-      value,
-      value2,
+      category_value,
+      date_value,
       options,
       searchOption,
       search_key,
       search_keyWork,
       tableData,
       handleCurrentChange,
-      handleSizeChange
+      handleSizeChange,
+      dialog_Info,
+      close
     };
   }
 };
