@@ -49,3 +49,16 @@ div.el-table {
 body .el-table th.gutter {
     display: table-cell!important;
 }
+
+//dialog样式
+.el-dialog__body {
+    padding: 20px 47px !important;
+}
+
+.el-dialog__footer {
+    padding: 0 47px 30px 47px !important;
+}
+
+.el-textarea__inner {
+    height: 90px !important;
+}

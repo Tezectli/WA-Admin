@@ -6,12 +6,15 @@ import router from "./router";
 import store from "./store/index";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+//定义自己的全局方法
+import global from "@/utils/global.js"
 //引入icons里的全局组件
 import "./icons/index.js";
 import "./router/premit"
 // import axios from 'axios';
 // import qs from 'qs';
 // Vue.prototype.$qs = qs;
+Vue.use(global);
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 

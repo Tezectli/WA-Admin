@@ -54,15 +54,15 @@
       <el-table-column label="操作">
         <!-- <template slot-scope="scope"> -->
         <template>
-          <el-button size="mini">编辑</el-button>
-          <el-button size="mini" type="danger">删除</el-button>
+          <el-button size="mini" @click="dialog_Info = true">编辑</el-button>
+          <el-button size="mini" type="danger" @click="deleteItem">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="black-space-30"></div>
     <el-row>
       <el-col :span="12">
-        <el-button size="medium">批量操作</el-button>
+        <el-button size="medium" @click="deleteAll">批量操作</el-button>
       </el-col>
       <el-col :span="12">
         <el-pagination background layout="total,sizes,prev, pager, next,jumper" :total="1000" :current-page="1"
@@ -80,12 +80,13 @@
   </div>
 </template>
 <script>
+import { global } from "@/utils/global_V3.0.js";
 import DialogInfo from "./dialog/info";
-import { reactive, ref } from "@vue/composition-api";
+import { reactive, ref, watch, watchEffect } from "@vue/composition-api";
 export default {
   name: "infoIndex",
   components: { DialogInfo },
-  setup(props) {
+  setup(props, { root }) {
     //非reative数据
     //弹窗
     const dialog_Info = ref(false);
@@ -96,6 +97,40 @@ export default {
     //分页数据
     const handleSizeChange = val => {};
     const handleCurrentChange = val => {};
+    const { str: aaa, confirm } = global();
+    watchEffect(() => console.log(aaa.value));
+
+    const deleteItem = () => {
+      // root.confirm({
+      //   content: "确认删除当前信息？",
+      //   tip: "警告1",
+      //   fn: confirmDelete,
+      //   id: "2222"
+      // });
+      confirm({
+        content: "确认删除当前信息？",
+        tip: "警告1",
+        fn: confirmDelete,
+        id: "2222"
+      });
+    };
+    const deleteAll = () => {
+      //2.0中的写法：this.aaa();
+      //root.aaa();
+      confirm({
+        content: "确认删除全部信息？",
+        fn: confirmDelete,
+        id: "11111"
+      });
+      // root.confirm({
+      //   content: "确认删除全部信息？",
+      //   fn: confirmDelete,
+      //   id: "11111"
+      // });
+    };
+    const confirmDelete = value => {
+      console.log(value);
+    };
     /**
     数据
      */
@@ -163,7 +198,9 @@ export default {
       handleCurrentChange,
       handleSizeChange,
       dialog_Info,
-      close
+      close,
+      deleteItem,
+      deleteAll
     };
   }
 };
