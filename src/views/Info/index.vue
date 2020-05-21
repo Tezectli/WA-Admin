@@ -40,16 +40,16 @@
     </el-form>
     <div class="black-space-30"></div>
     <!-- 表格 -->
-    <el-table :data="tableData" border style="width: 100%">
+    <el-table :data="table_data.item" border style="width: 100%">
       <el-table-column type="selection" width="55">
       </el-table-column>
-      <el-table-column prop="name" label="商品名称" width="155">
+      <el-table-column prop="SPMC" label="商品名称" width="155">
       </el-table-column>
-      <el-table-column prop="info" label="商品信息" width="650">
+      <el-table-column prop="SPXQ" label="商品信息" width="650">
       </el-table-column>
-      <el-table-column prop="price" label="商品价格" width="140">
+      <el-table-column prop="SPJG" label="商品价格" width="140">
       </el-table-column>
-      <el-table-column prop="store" label="商品库存" width="140">
+      <el-table-column prop="SPKC" label="商品库存" width="140">
       </el-table-column>
       <el-table-column label="操作">
         <!-- <template slot-scope="scope"> -->
@@ -65,8 +65,8 @@
         <el-button size="medium" @click="deleteAll">批量操作</el-button>
       </el-col>
       <el-col :span="12">
-        <el-pagination background layout="total,sizes,prev, pager, next,jumper" :total="1000" :current-page="1"
-          :page-sizes="[10, 20, 30, 40]" @size-change="handleSizeChange" @current-change="handleCurrentChange"
+        <el-pagination background layout="total,sizes,prev, pager, next,jumper" :total="total" :current-page="1"
+          :page-sizes="[5, 10, 20, 30]" @size-change="handleSizeChange" @current-change="handleCurrentChange"
           class="pull-right">
         </el-pagination>
       </el-col>
@@ -80,9 +80,11 @@
   </div>
 </template>
 <script>
+import qs from "qs";
+import { AddInfo, GetList } from "@/api/news";
 import { global } from "@/utils/global_V3.0.js";
 import DialogInfo from "./dialog/info";
-import { reactive, ref, watch, watchEffect } from "@vue/composition-api";
+import { reactive, ref, watchEffect, onMounted } from "@vue/composition-api";
 export default {
   name: "infoIndex",
   components: { DialogInfo },
@@ -94,9 +96,17 @@ export default {
     const date_value = ref("");
     const search_key = ref("id");
     const search_keyWork = ref("");
+    const total = ref(0);
     //分页数据
-    const handleSizeChange = val => {};
-    const handleCurrentChange = val => {};
+    const handleSizeChange = val => {
+      console.log(111111);
+      page.pageSize = val;
+    };
+    const handleCurrentChange = val => {
+      console.log(222222);
+      page.pageNumber = val;
+      getlist();
+    };
     const { str: aaa, confirm } = global();
     watchEffect(() => console.log(aaa.value));
 
@@ -131,6 +141,25 @@ export default {
     const confirmDelete = value => {
       console.log(value);
     };
+    const page = reactive({
+      pageNumber: 1,
+      pageSize: 5
+    });
+    const getlist = () => {
+      let postData = qs.stringify({
+        // pageNumber: 1,
+        // pageSize: 5
+        pageNumber: page.pageNumber,
+        pageSize: page.pageSize
+      });
+      GetList(postData).then(response => {
+        let data = response.data.list;
+        table_data.item = data;
+        console.log(table_data.item);
+        total.value = parseInt(response.data.total);
+        console.log(typeof total.value);
+      });
+    };
     /**
     数据
      */
@@ -161,32 +190,36 @@ export default {
 
     //表格数据
 
-    const tableData = reactive([
-      {
-        name: "抱枕1",
-        info: "上抱枕（pillow）是家居生活中常见用品，类似枕头",
-        price: "80",
-        store: "99"
-      },
-      {
-        name: "抱枕1",
-        info: "上抱枕（pillow）是家居生活中常见用品，类似枕头啦啦啦啦啦啦",
-        price: "80",
-        store: "99"
-      },
-      {
-        name: "抱枕1",
-        info: "上抱枕（pillow）是家居生活中常见用品，类似枕头",
-        price: "80",
-        store: "99"
-      },
-      {
-        name: "抱枕1",
-        info: "上抱枕（pillow）是家居生活中常见用品，类似枕头么么么么么么么",
-        price: "80",
-        store: "99"
-      }
-    ]);
+    const table_data = reactive({
+      item: []
+      // {
+      //   name: "抱枕1",
+      //   info: "上抱枕（pillow）是家居生活中常见用品，类似枕头",
+      //   price: "80",
+      //   store: "99"
+      // },
+      // {
+      //   name: "抱枕1",
+      //   info: "上抱枕（pillow）是家居生活中常见用品，类似枕头啦啦啦啦啦啦",
+      //   price: "80",
+      //   store: "99"
+      // },
+      // {
+      //   name: "抱枕1",
+      //   info: "上抱枕（pillow）是家居生活中常见用品，类似枕头",
+      //   price: "80",
+      //   store: "99"
+      // },
+      // {
+      //   name: "抱枕1",
+      //   info: "上抱枕（pillow）是家居生活中常见用品，类似枕头么么么么么么么",
+      //   price: "80",
+      //   store: "99"
+      // }
+    });
+    onMounted(() => {
+      getlist();
+    });
     return {
       category_value,
       date_value,
@@ -194,13 +227,15 @@ export default {
       searchOption,
       search_key,
       search_keyWork,
-      tableData,
+      table_data,
       handleCurrentChange,
       handleSizeChange,
       dialog_Info,
       close,
       deleteItem,
-      deleteAll
+      deleteAll,
+      getlist,
+      total
     };
   }
 };

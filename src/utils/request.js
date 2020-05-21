@@ -33,6 +33,11 @@ service.interceptors.response.use(function(response) {
         Message.success(data.message);
         return response;
 
+    }
+    if (data.resCode == 203) {
+        // Message.success(data.message);
+        return response;
+
     } else {
         // Message.success(data.message);
         Message.error(data.message);
