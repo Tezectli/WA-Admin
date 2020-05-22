@@ -12,7 +12,8 @@ const routes = [{
         redirect: "login",
         hidden: true,
         meta: {
-            name: "主页"
+            name: "主页",
+            title: "OfferClear-登录"
         }
         //component: Home
     },
@@ -22,7 +23,8 @@ const routes = [{
         //component: () => import("../views/Login/index.vue")
         hidden: true,
         meta: {
-            name: "登录"
+            name: "登录",
+            title: "OfferClear-欢迎"
         },
         component: () =>
             import ("../views/Login/index.vue")
@@ -31,7 +33,7 @@ const routes = [{
     {
         path: "/console",
         name: "Console",
-        redirect: "index",
+        redirect: "infoIndex",
         meta: {
             name: "控制台",
             icon: 'console'
@@ -64,7 +66,8 @@ const routes = [{
                 path: "/infoIndex",
                 name: "infoIndex",
                 meta: {
-                    name: "信息列表"
+                    name: "信息列表",
+                    title: "OfferClear-信息列表"
                 },
                 component: () =>
                     import ("../views/Info/index.vue")

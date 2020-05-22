@@ -1,6 +1,7 @@
 <template>
   <div id="nav-wrap">
-    <h1 class="logo"><img src="../../../assets/logo.png" alt=""></h1>
+    <h1 class="logo"><img src="../../../assets/logo2.png" alt=""></h1>
+    <div class="title">- OfferClear Admin -</div>
     <!-- transparent:背景透明 -->
     <el-menu default-active="1-4-1" class="el-menu-vertical-demo" :collapse="isCollapse" background-color="transparent"
       text-color="#fff" active-text-color="#fff" router>
@@ -54,12 +55,29 @@ export default {
 .el-menu {
   border-right: 0;
 }
+.title {
+  margin: 20px auto;
+  width: 180px;
+  font-size: 19px;
+  color: #f1f0cf;
+  @include webkit(transition, all 0.3s ease 0s);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
 .logo {
   text-align: center;
+  // img {
+  //   // margin: 28px auto 25px;
+  //   margin: 28px auto;
+  //   width: 75px;
+  //   @include webkit(transition, all 0.3s ease 0s);
+  //   // box-shadow: 0 3px 16px 0 rgb(0, 0, 0);
+  //   // @include webkit(transition, all 0.3s ease 0s);
+  // }
   img {
     // margin: 28px auto 25px;
     margin: 28px auto;
-    width: 75px;
+    width: 95px;
     @include webkit(transition, all 0.3s ease 0s);
     // box-shadow: 0 3px 16px 0 rgb(0, 0, 0);
     // @include webkit(transition, all 0.3s ease 0s);
@@ -91,6 +109,9 @@ export default {
   }
   .logo img {
     width: 55%;
+  }
+  .title {
+    display: none;
   }
 }
 </style>

@@ -20,6 +20,9 @@ Vue.config.productionTip = false;
 
 //路由守卫
 router.beforeEach((to, from, next) => {
+    if (to.meta.title) {
+        document.title = to.meta.title
+    }
     console.log(to); //进入的页面
     console.log(from); //离开之前的页面（上一个）
     console.log(next);

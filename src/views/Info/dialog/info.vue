@@ -1,22 +1,22 @@
 <template>
   <el-dialog title="新增" :visible.sync="dialog_Info_flag" width="580px" @close="close">
     <el-form :model="form" ref="addInfoForm">
-      <el-form-item label="商品选项" :label-width="formLabelWidth">
+      <el-form-item label="分组选项" :label-width="formLabelWidth">
         <el-select v-model="form.region" placeholder="请选择类别图标">
           <el-option label="选项一" value="shanghai"></el-option>
           <el-option label="选项二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="商品名称" :label-width="formLabelWidth">
+      <el-form-item label="公司名称" :label-width="formLabelWidth">
         <el-input v-model="form.t_name" autocomplete="off" style="width:200px"></el-input>
       </el-form-item>
-      <el-form-item label="商品价格" :label-width="formLabelWidth">
+      <el-form-item label="招聘地点" :label-width="formLabelWidth">
         <el-input v-model="form.t_nandu" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="商品库存" :label-width="formLabelWidth">
+      <el-form-item label="招聘时间" :label-width="formLabelWidth">
         <el-input v-model="form.t_fenzu" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="商品信息" :label-width="formLabelWidth">
+      <el-form-item label="招聘详情" :label-width="formLabelWidth">
         <el-input type="textarea" v-model="form.t_info" autocomplete="off"></el-input>
       </el-form-item>
     </el-form>

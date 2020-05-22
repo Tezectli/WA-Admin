@@ -39,8 +39,8 @@
       </el-row>
     </el-form>
     <div class="black-space-30"></div>
-    <!-- 表格 -->
-    <el-table :data="table_data.item" border style="width: 100%">
+    <!-- 表格1商品 -->
+    <!-- <el-table :data="table_data.item" border style="width: 100%">
       <el-table-column type="selection" width="55">
       </el-table-column>
       <el-table-column prop="SPMC" label="商品名称" width="155">
@@ -50,6 +50,20 @@
       <el-table-column prop="SPJG" label="商品价格" width="140">
       </el-table-column>
       <el-table-column prop="SPKC" label="商品库存" width="140">
+      </el-table-column>
+      <el-table-column label="操作"> -->
+
+    <!-- 表格2题库 -->
+    <el-table :data="table_data.item" border style="width: 100%">
+      <el-table-column type="selection" width="55">
+      </el-table-column>
+      <el-table-column prop="SPMC" label="公司名称" width="155">
+      </el-table-column>
+      <el-table-column prop="SPXQ" label="招聘详情" width="650">
+      </el-table-column>
+      <el-table-column prop="SPJG" label="招聘地点" width="140">
+      </el-table-column>
+      <el-table-column prop="SPKC" label="招聘时间" width="140">
       </el-table-column>
       <el-table-column label="操作">
         <!-- <template slot-scope="scope"> -->
