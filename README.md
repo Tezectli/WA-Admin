@@ -60,33 +60,11 @@ WA-Admin
 ## 安装运行
 
 * #### 第一步
-    * 克隆项目到本地`git clone http://github.com/zhcxk1998/School-Partners
+    * 克隆项目到本地`git clone https://github.com/Tezectli/WA-Admin.git
 * #### 第二步
-    * `cnpm i`安装依赖
+    * `npm install`安装依赖
 * #### 第三步
-    * 构建小程序运行服务`npm run dev:weapp`
-    * 构建管理端 `npm run dev`
+    * 构建小程序运行服务`npm run dev:mp-weixin`
+    * 构建管理端 `npm run serve`
 * #### 第四部
     * 在微信小程序开发工具中预览
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
