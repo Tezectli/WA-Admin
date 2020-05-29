@@ -16,8 +16,58 @@
 > 小程序端
 
 ![](https://s1.ax1x.com/2020/05/30/tKDCPx.jpg) 
-> 管理端
+> 管理端 
+#### 登录/注册
+![](https://s1.ax1x.com/2020/05/30/tKDVqH.jpg) 
+#### 首页 
+![](https://s1.ax1x.com/2020/05/30/tKDcw9.jpg) 
+#### 添加/编辑 
+![](https://s1.ax1x.com/2020/05/30/tKDfW6.jpg) 
+## 项目结构
+```
+WA-Admin
+├─ src
+│  ├─ api        //接口文件  
+│  ├─ icons      //svg图标
+│  ├─ main.js    //路由守卫
+│  ├─ router     //路由管理
+│  ├─ store      //Vuex与缓存设置
+│  ├─ styles     //sass公用样式
+│  ├─ utils      //js封装
+│  └─ views      //所有页面
+│     ├─ About.vue
+│     ├─ Home.vue
+│     ├─ Info
+│     │  ├─ category.vue
+│     │  ├─ dialog         //弹框组件封装
+│     │  │  └─ info.vue 
+│     │  └─ index.vue
+│     ├─ Layout
+│     │  ├─ Components     //导航顶栏，导航侧栏以及主体
+│     │  │  ├─ Header.vue
+│     │  │  ├─ Main.vue
+│     │  │  └─ Nav.vue
+│     │  └─ index.vue
+│     ├─ Login             //登录注册
+│     │  ├─ index.vue
+│     │  ├─ index2.vue
+│     │  └─ index3.vue
+│     └─ User
+│        └─ index.vue
+└─ vue.config.js
+``` 
 
+## 安装运行
+
+* #### 第一步
+    * 克隆项目到本地`git clone http://github.com/zhcxk1998/School-Partners
+* #### 第二步
+    * `cnpm i`安装依赖
+* #### 第三步
+    * 构建小程序运行服务`npm run dev:weapp`
+    * 构建管理端 `npm run dev`
+* #### 第四部
+    * 在微信小程序开发工具中预览
 ## Project setup
 ```
 npm install
