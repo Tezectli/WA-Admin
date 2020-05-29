@@ -56,6 +56,39 @@ WA-Admin
 │        └─ index.vue
 └─ vue.config.js
 ```
+WA-Admin
+├─ src
+│  ├─ api        //接口文件  
+│  ├─ icons      //svg图标
+│  ├─ main.js    //路由守卫
+│  ├─ router     //路由管理
+│  ├─ store      //Vuex与缓存设置
+│  ├─ styles     //sass公用样式
+│  ├─ utils      //js封装
+│  └─ views      //所有页面
+│     ├─ About.vue
+│     ├─ Home.vue
+│     ├─ Info
+│     │  ├─ category.vue
+│     │  ├─ dialog         //弹框组件封装
+│     │  │  └─ info.vue 
+│     │  └─ index.vue
+│     ├─ Layout
+│     │  ├─ Components     //导航顶栏，导航侧栏以及主体
+│     │  │  ├─ Header.vue
+│     │  │  ├─ Main.vue
+│     │  │  └─ Nav.vue
+│     │  └─ index.vue
+│     ├─ Login             //登录注册
+│     │  ├─ index.vue
+│     │  ├─ index2.vue
+│     │  └─ index3.vue
+│     └─ User
+│        └─ index.vue
+└─ vue.config.js
+``` 
+
+## 安装运行
 
 ## 安装运行
 
