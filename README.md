@@ -60,7 +60,7 @@ WA-Admin
 ## 安装运行
 
 * #### 第一步
-    * 克隆项目到本地`git clone https://github.com/Tezectli/WA-Admin.git
+    * 克隆项目到本地`git clone https://github.com/Tezectli/WA-Admin.git`
 * #### 第二步
     * `npm install`安装依赖
 * #### 第三步
