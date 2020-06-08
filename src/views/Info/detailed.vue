@@ -1,0 +1,98 @@
+<template>
+  <div>
+    <!-- <el-form :inline="true" :model="formInline" class="demo-form-inline"> -->
+    <el-form :inline="true" class="demo-form-inline">
+      <el-row :gutter="80">
+        <el-col :span="10">
+          <div class="block2">
+            <span class="demonstration"></span>
+            <el-image :src="src"></el-image>
+          </div>
+        </el-col>
+
+        <el-col :span="12">
+          <div class="black-space-30"></div>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="公司ID" label-width="70px">
+            <el-input v-model="form.t_id" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="公司名称" label-width="70px">
+            <el-input v-model="form.t_name" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="招聘地点" label-width="70px">
+            <el-input v-model="form.t_nadu" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="招聘时间" label-width="70px">
+            <el-input v-model="form.t_fenzu" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="招聘详情" label-width="70px">
+            <el-input v-model="form.t_info" autocomplete="off" style="width:400px" :disabled="true">
+            </el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
+  </div>
+</template>
+<script>
+import { reactive, ref, watchEffect, onMounted } from "@vue/composition-api";
+export default {
+  name: "infoDetailed",
+  setup(props, { root }) {
+    let id = root.$route.query.id;
+    let name = root.$route.query.name;
+    let title = root.$route.query.title;
+    let place = root.$route.query.place;
+    let time = root.$route.query.time;
+    let pic = root.$route.query.pic;
+    console.log(id);
+    console.log(title);
+    console.log(place);
+    console.log(time);
+    console.log(pic);
+    console.log(name);
+    const form = reactive({
+      t_name: "",
+      t_nandu: "",
+      t_fenzu: "",
+      t_info: "",
+      t_id: "",
+      name: "",
+      region: "",
+      date1: "",
+      date2: "",
+      delivery: false,
+      type: [],
+      resource: "",
+      desc: ""
+    });
+    const src = ref("http://localhost:8080/Z_web/pic/" + pic);
+    onMounted(() => {
+      form.t_name = name;
+      form.t_nadu = place;
+      form.t_fenzu = time;
+      form.t_info = title;
+      form.t_id = id;
+    });
+    return {
+      src,
+      form
+    };
+  }
+};
+</script>
+<style lang="scss" scoped>
+.block2 {
+  width: 200px !important;
+  height: 100vh;
+}
+</style>

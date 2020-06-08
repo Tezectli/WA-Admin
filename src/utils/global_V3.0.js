@@ -16,7 +16,9 @@ export function global() {
                 //     message: "删除成功!"
                 // });
                 str.value = "测试测试测试！！！！！"
-                    //当&&符号前置位true就会执行后面的函数 如果前面为flase就不会执行
+                console.log(params.id);
+
+                //当&&符号前置位true就会执行后面的函数 如果前面为flase就不会执行
                 params.fn && params.fn(params.id)
                     // if (params.fn) { params.fn() }
 

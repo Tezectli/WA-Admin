@@ -21,7 +21,22 @@ export function AddInfo(data) {
 }
 /**
  * 编辑
+ * 
  */
+export function EditInfo(data) {
+    return service.request({
+        method: "post",
+        url: "OF_editsubject",
+        data
+    })
+}
 /**
  * 删除
  */
+export function DeleteInfo(data) {
+    return service.request({
+        method: "post",
+        url: "OF_deletesubject",
+        data
+    })
+}

@@ -13,8 +13,10 @@
             <span slot="title">{{ item.meta.name }}</span>
             <!-- <svg-icon iconClass="message" className="message" /> -->
           </template>
-          <el-menu-item v-for="subItem in item.children" :key="subItem.id" :index="subItem.path">{{subItem.meta.name}}
-          </el-menu-item>
+          <template v-for="subItem in item.children">
+            <el-menu-item v-if="!subItem.hidden" :key="subItem.id" :index="subItem.path">{{subItem.meta.name}}
+            </el-menu-item>
+          </template>
           <!-- <el-menu-item index="1-2">选项2</el-menu-item> -->
         </el-submenu>
       </template>
