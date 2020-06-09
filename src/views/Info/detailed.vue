@@ -6,39 +6,40 @@
         <el-col :span="10">
           <div class="block2">
             <span class="demonstration"></span>
-            <el-image :src="src"></el-image>
+            <el-image :src="src" :fit="fit"></el-image>
           </div>
         </el-col>
-
-        <el-col :span="12">
-          <div class="black-space-30"></div>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="公司ID" label-width="70px">
-            <el-input v-model="form.t_id" autocomplete="off" style="width:200px" :disabled="true"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="公司名称" label-width="70px">
-            <el-input v-model="form.t_name" autocomplete="off" style="width:200px" :disabled="true"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="招聘地点" label-width="70px">
-            <el-input v-model="form.t_nadu" autocomplete="off" style="width:200px" :disabled="true"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="招聘时间" label-width="70px">
-            <el-input v-model="form.t_fenzu" autocomplete="off" style="width:200px" :disabled="true"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="招聘详情" label-width="70px">
-            <el-input v-model="form.t_info" autocomplete="off" style="width:400px" :disabled="true">
-            </el-input>
-          </el-form-item>
-        </el-col>
+        <div class="el">
+          <el-col :span="14">
+            <div class="black-space-30"></div>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="公司ID" label-width="70px" class="el iu">
+              <el-input v-model="form.t_id" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="公司名称" label-width="70px" class="el iu">
+              <el-input v-model="form.t_name" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="招聘地点" label-width="70px" class="el iu">
+              <el-input v-model="form.t_nadu" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="招聘时间" label-width="70px" class="el iu">
+              <el-input v-model="form.t_fenzu" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="招聘详情" label-width="70px " class="el iu">
+              <el-input v-model="form.t_info" autocomplete="off" style="width:400px" :disabled="true">
+              </el-input>
+            </el-form-item>
+          </el-col>
+        </div>
       </el-row>
     </el-form>
   </div>
@@ -76,6 +77,7 @@ export default {
       desc: ""
     });
     const src = ref("http://localhost:8080/Z_web/pic/" + pic);
+    const fit = ref("contain");
     onMounted(() => {
       form.t_name = name;
       form.t_nadu = place;
@@ -85,14 +87,28 @@ export default {
     });
     return {
       src,
-      form
+      form,
+      fit
     };
   }
 };
 </script>
 <style lang="scss" scoped>
 .block2 {
-  width: 200px !important;
-  height: 100vh;
+  width: 100%;
+  height: 500px;
+  img {
+    width: 200px;
+  }
+}
+.label2 {
+  padding: 0 12px 24px 0 !important;
+}
+.el {
+  // padding-bottom: 30px !important;
+  // line-height: 60px;
+  &.iu {
+    padding: 0 12px 24px 0 !important;
+  }
 }
 </style>

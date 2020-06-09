@@ -62,3 +62,11 @@ body .el-table th.gutter {
 .el-textarea__inner {
     height: 90px !important;
 }
+
+.el-image__inner {
+    width: 400px;
+    height: 300px;
+    /* ... */
+    margin: 22px;
+    display: block;
+}
