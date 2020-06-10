@@ -2,13 +2,14 @@
     font-size: 14px;
     padding-left: 50px !important;
     &.is-active {
-        background-color: rgba(255, 118, 118, 0.514) !important;
+        // background-color: rgba(255, 118, 118, 0.514) !important;
+        background-color: #525a63 !important;
     }
 }
 
 li.el-submenu {
     &.is-active.is-opened .el-submenu__title {
-        background-color: $sidecolor !important;
+        background-color: #30353a !important;
     }
 }
 

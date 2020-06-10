@@ -1,10 +1,12 @@
 <template>
   <div id="nav-wrap">
-    <h1 class="logo"><img src="../../../assets/logo2.png" alt=""></h1>
-    <div class="title">- OfferClear Admin -</div>
+    <h1 class="logo"><img src="../../../assets/logoWA.png" alt=""></h1>
+    <!-- <div class="title">- OfferClear Admin -</div> -->
+    <!-- <div class="title">WA后台管理系统</div> -->
+    <div class="black-space-10"></div>
     <!-- transparent:背景透明 -->
-    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" :collapse="isCollapse" background-color="transparent"
-      text-color="#fff" active-text-color="#fff" router>
+    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" :collapse="isCollapse" background-color="#454c53"
+      text-color="#fff" active-text-color="#ffd04b" router>
       <template v-for="(item,index) in routers">
         <el-submenu v-if="!item.hidden" :key="item.id" :index="index+''">
           <template slot="title">
@@ -59,12 +61,12 @@ export default {
 }
 .title {
   margin: 20px auto;
-  width: 180px;
-  font-size: 19px;
-  color: #f1f0cf;
+  width: 120px;
+  font-size: 15px;
+  color: #ffffff;
   @include webkit(transition, all 0.3s ease 0s);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Microsoft YaHei";
+  font-weight: lighter;
 }
 .logo {
   text-align: center;
@@ -78,8 +80,8 @@ export default {
   // }
   img {
     // margin: 28px auto 25px;
-    margin: 28px auto;
-    width: 95px;
+    margin: 24px auto;
+    width: 110px;
     @include webkit(transition, all 0.3s ease 0s);
     // box-shadow: 0 3px 16px 0 rgb(0, 0, 0);
     // @include webkit(transition, all 0.3s ease 0s);

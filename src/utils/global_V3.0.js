@@ -17,9 +17,11 @@ export function global() {
                 // });
                 str.value = "测试测试测试！！！！！"
                 console.log(params.id);
+                console.log("id之前可以输出");
+                console.log(params.user);
 
                 //当&&符号前置位true就会执行后面的函数 如果前面为flase就不会执行
-                params.fn && params.fn(params.id)
+                params.fn && params.fn(params.id, params.user)
                     // if (params.fn) { params.fn() }
 
             })

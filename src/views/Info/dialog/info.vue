@@ -1,5 +1,6 @@
 <template>
-  <el-dialog title="新增" :visible.sync="dialog_Info_flag" width="580px" @close="close">
+  <!-- ********以下是of-clear的代码********** -->
+  <!-- <el-dialog title="新增" :visible.sync="dialog_Info_flag" width="580px" @close="close">
     <el-form :model="form" ref="addInfoForm">
       <el-form-item label="分组选项" :label-width="formLabelWidth">
         <el-select v-model="form.region" placeholder="请选择类别图标">
@@ -17,6 +18,38 @@
         <el-input v-model="form.t_fenzu" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="招聘详情" :label-width="formLabelWidth">
+        <el-input type="textarea" v-model="form.t_info" autocomplete="off"></el-input>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="close">取 消</el-button>
+      <el-button type="primary" @click="submit" :loading="submitLoding">确 定</el-button>
+    </div>
+  </el-dialog> -->
+  <!-- ********以上是of-clear的代码********** -->
+
+  <el-dialog title="新增" :visible.sync="dialog_Info_flag" width="580px" @close="close">
+    <el-form :model="form" ref="addInfoForm">
+      <el-form-item label="分组选项" :label-width="formLabelWidth">
+        <el-select v-model="form.region" placeholder="请选择类别图标">
+          <el-option label="选项一" value="shanghai"></el-option>
+          <el-option label="选项二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
+      <!-- SPMC -->
+      <el-form-item label="商品名称" :label-width="formLabelWidth">
+        <el-input v-model="form.t_name" autocomplete="off" style="width:200px"></el-input>
+      </el-form-item>
+      <!-- SPJG -->
+      <el-form-item label="商品价格" :label-width="formLabelWidth">
+        <el-input v-model="form.t_nandu" autocomplete="off"></el-input>
+      </el-form-item>
+      <!-- SPKC -->
+      <el-form-item label="商品库存" :label-width="formLabelWidth">
+        <el-input v-model="form.t_fenzu" autocomplete="off"></el-input>
+      </el-form-item>
+      <!-- SPXQ -->
+      <el-form-item label="商品详情" :label-width="formLabelWidth">
         <el-input type="textarea" v-model="form.t_info" autocomplete="off"></el-input>
       </el-form-item>
     </el-form>
@@ -100,11 +133,14 @@ export default {
           console.log(response.data);
           submitLoding.value = false;
           // root.$refs.addInfoForm.resetFields();
-          resetForm();
+          emit("emitgetlist2");
+          // resetForm();
+          close();
         })
         .catch(error => {
           submitLoding.value = false;
         });
+      emit("emitgetlist2");
     };
     return {
       dialog_Info_flag,

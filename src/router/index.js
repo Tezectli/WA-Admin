@@ -113,10 +113,72 @@ const routes = [{
                     name: "用户列表"
                 },
                 component: () =>
-                    import ("../views/User/index.vue")
+                    import ("../views/Info/usercategory.vue")
             },
         ]
     },
+    // {
+    //     path: "/User",
+    //     name: "User",
+    //     meta: {
+    //         name: "用户管理",
+    //         icon: "message"
+    //     },
+    //     component: Layout,
+    //     children: [
+
+    //         {
+    //             path: "/userIndex",
+    //             name: "UserIndex",
+    //             meta: {
+    //                 name: "用户列表"
+    //             },
+    //             component: () =>
+    //                 import ("../views/User/index.vue")
+    //         },
+    //     ]
+    // },
+    /**
+     * 关于我们
+     */
+    {
+        path: "/aboutus",
+        name: "aboutus",
+        meta: {
+            name: "关于我们",
+            icon: "message"
+        },
+        component: Layout,
+        children: [
+
+            {
+                path: "/aboutusin",
+                name: "aboutusin",
+                meta: {
+                    name: "About us"
+                },
+                component: () =>
+                    import ("../views/Info/aboutus.vue")
+            },
+        ]
+    },
+    // {
+    //     path: "/aboutus",
+    //     name: "Aboutus",
+    //     //component: () => import("../views/Login/index.vue")
+    //     // hidden: true,
+    //     meta: {
+    //         name: "关于我们",
+    //         title: "关于我们",
+    //         icon: "message"
+    //     },
+    //     component: Layout,
+    //     children: [{
+    //         component: () =>
+    //             import ("../views/Info/aboutus.vue")
+    //     }]
+
+    // }
 ];
 
 const router = new VueRouter({

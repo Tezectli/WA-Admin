@@ -40,3 +40,54 @@ export function DeleteInfo(data) {
         data
     })
 }
+/**
+ * 用户列表
+ */
+export function GetuserList(data) {
+    return service.request({
+        method: "post",
+        url: "OF_userlist",
+        data
+    })
+}
+/**
+ * 用户新增
+ */
+export function AdduserInfo(data) {
+    return service.request({
+        method: "post",
+        url: "OF_addsubject",
+        data
+    })
+}
+/**
+ * 用户编辑
+ * 
+ */
+export function EdituserInfo(data) {
+    return service.request({
+        method: "post",
+        url: "OF_edituser",
+        data
+    })
+}
+/**
+ * 用户删除
+ */
+export function DeleteuserInfo(data) {
+    return service.request({
+        method: "post",
+        url: "OF_deleteuser",
+        data
+    })
+}
+/**
+ * 关于我们列表
+ */
+export function Aboutuslist(data) {
+    return service.request({
+        method: "post",
+        url: "OF_aboutlist",
+        data
+    })
+}

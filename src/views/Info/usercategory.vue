@@ -64,17 +64,17 @@
     <el-table :data="table_data.item" border style="width: 100%">
       <el-table-column type="selection" width="55">
       </el-table-column>
-      <el-table-column prop="SPMC" label="商品名称" width="155">
+      <el-table-column prop="SPXQ" label="用户名称" width="200">
       </el-table-column>
-      <el-table-column prop="SPXQ" label="商品详情" width="550">
+      <el-table-column prop="SPKC" label="用户邮箱" width="400">
       </el-table-column>
-      <el-table-column prop="SPJG" label="商品价格" width="140">
+      <el-table-column prop="SPMC" label="用户账号" width="200">
       </el-table-column>
-      <el-table-column prop="SPKC" label="商品库存" width="140">
+      <el-table-column prop="SPJG" label="用户密码" width="200">
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" @click="detailed(scope.row)">详情</el-button>
+          <!-- <el-button size="mini" @click="detailed(scope.row)">详情</el-button> -->
           <el-button size="mini" @click="editInfo(scope.row.SPID)">编辑</el-button>
           <el-button size="mini" type="danger" @click="deleteItem(scope.row.SPID)">删除</el-button>
         </template>
@@ -97,19 +97,25 @@
     <!-- 需要修改逻辑处理的话可以使用回调函数，不涉及的话可以用修饰器 -->
     <!-- <DialogInfo :flag.sync="dialog_Info" @close="closeDialog" /> -->
     <DialogInfo :flag.sync="dialog_Info" />
-    <DialogEditInfo :flag.sync="dialog_Info_edit" :id="infoId" @Emitgetlist="getlist" />
+    <DialogEditInfo :flag.sync="dialog_Info_edit" :id="infoId" @Emitgetlistuser="getlist" :useridenty="useredit" />
 
   </div>
 </template>
 <script>
 import qs from "qs";
-import { AddInfo, GetList, DeleteInfo } from "@/api/news";
+import {
+  AddInfo,
+  GetList,
+  DeleteInfo,
+  GetuserList,
+  DeleteuserInfo
+} from "@/api/news";
 import { global } from "@/utils/global_V3.0.js";
 import DialogInfo from "./dialog/info";
 import DialogEditInfo from "./dialog/edit";
 import { reactive, ref, watchEffect, onMounted } from "@vue/composition-api";
 export default {
-  name: "infocatgory",
+  name: "usercatgory",
   components: { DialogInfo, DialogEditInfo },
   setup(props, { root }) {
     //非reative数据
@@ -123,6 +129,9 @@ export default {
     const total = ref(0);
     const infoId = ref("");
     const infoId2 = ref("");
+    const infouser = ref("");
+    const infouseredit = ref("");
+    const useredit = ref("2");
     //分页数据
     const handleSizeChange = val => {
       // console.log(111111);
@@ -153,7 +162,7 @@ export default {
         }
       });
     };
-    const deleteItem = SPID => {
+    const deleteItem = (SPID, userkey = 2) => {
       // root.confirm({
       //   content: "确认删除当前信息？",
       //   tip: "警告1",
@@ -161,18 +170,21 @@ export default {
       //   id: "2222"
       // });
       infoId2.value = SPID;
-      console.log(infoId2.value);
+      infouser.value = userkey;
+      console.log(infouser.value);
 
       confirm({
         content: "确认删除当前信息？",
         tip: "确认删除",
         fn: confirmDelete,
-        id: infoId2.value
+        id: infoId2.value,
+        user: infouser.value
       });
     };
-    const editInfo = SPID => {
+    const editInfo = (SPID, usereditkey = 2) => {
       console.log(SPID);
       infoId.value = SPID;
+      infouseredit.value = usereditkey;
       dialog_Info_edit.value = true;
     };
     const deleteAll = () => {
@@ -189,17 +201,25 @@ export default {
       //   id: "11111"
       // });
     };
-    const confirmDelete = value => {
+    const confirmDelete = (value, value2) => {
       console.log(value);
-
+      console.log(value2);
       console.log("可以删除");
       let postData2 = qs.stringify({
         d_id: value
       });
-      DeleteInfo(postData2).then(response => {
-        console.log("删除成功");
-        getlist();
-      });
+      if (value2 == 2) {
+        console.log("用户可以");
+        DeleteuserInfo(postData2).then(response => {
+          console.log("删除成功");
+          getlist();
+        });
+      } else {
+        DeleteInfo(postData2).then(response => {
+          console.log("删除成功");
+          getlist();
+        });
+      }
     };
     const page = reactive({
       pageNumber: 1,
@@ -212,7 +232,7 @@ export default {
         pageNumber: page.pageNumber,
         pageSize: page.pageSize
       });
-      GetList(postData).then(response => {
+      GetuserList(postData).then(response => {
         let data = response.data.list;
         table_data.item = data;
         console.log(table_data);
@@ -276,7 +296,10 @@ export default {
       editInfo,
       infoId,
       infoId2,
-      detailed
+      detailed,
+      infouser,
+      infouseredit,
+      useredit
     };
   }
 };

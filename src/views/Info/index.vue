@@ -34,27 +34,14 @@
           <el-button type="danger" size="medium">搜索</el-button>
         </el-col>
         <el-col :span="2">
-          <el-button type="danger" size="medium" class="pull-right" @click="dialog_Info = true">新增</el-button>
+          <el-button type="danger" size="medium" class="pull-right" @click="dialog_Info = true">
+            新增</el-button>
         </el-col>
       </el-row>
     </el-form>
     <div class="black-space-30"></div>
-    <!-- 表格1商品 -->
+    <!-- 以下是ofclear的代码 -->
     <!-- <el-table :data="table_data.item" border style="width: 100%">
-      <el-table-column type="selection" width="55">
-      </el-table-column>
-      <el-table-column prop="SPMC" label="商品名称" width="155">
-      </el-table-column>
-      <el-table-column prop="SPXQ" label="商品信息" width="650">
-      </el-table-column>
-      <el-table-column prop="SPJG" label="商品价格" width="140">
-      </el-table-column>
-      <el-table-column prop="SPKC" label="商品库存" width="140">
-      </el-table-column>
-      <el-table-column label="操作"> -->
-
-    <!-- 表格2题库 -->
-    <el-table :data="table_data.item" border style="width: 100%">
       <el-table-column type="selection" width="55">
       </el-table-column>
       <el-table-column prop="SPMC" label="公司名称" width="155">
@@ -72,7 +59,29 @@
           <el-button size="mini" type="danger" @click="deleteItem(scope.row.SPID)">删除</el-button>
         </template>
       </el-table-column>
+    </el-table> -->
+    <!-- 以下是ofclear的代码 -->
+
+    <el-table :data="table_data.item" border style="width: 100%">
+      <el-table-column type="selection" width="55">
+      </el-table-column>
+      <el-table-column prop="SPMC" label="商品名称" width="155">
+      </el-table-column>
+      <el-table-column prop="SPXQ" label="商品详情" width="550">
+      </el-table-column>
+      <el-table-column prop="SPJG" label="商品价格" width="140">
+      </el-table-column>
+      <el-table-column prop="SPKC" label="商品库存" width="140">
+      </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="detailed(scope.row)">详情</el-button>
+          <el-button size="mini" @click="editInfo(scope.row.SPID)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="deleteItem(scope.row.SPID)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
+
     <div class="black-space-30"></div>
     <el-row>
       <el-col :span="12">
@@ -88,7 +97,7 @@
     <!-- 弹窗 -->
     <!-- 需要修改逻辑处理的话可以使用回调函数，不涉及的话可以用修饰器 -->
     <!-- <DialogInfo :flag.sync="dialog_Info" @close="closeDialog" /> -->
-    <DialogInfo :flag.sync="dialog_Info" />
+    <DialogInfo :flag.sync="dialog_Info" @emitgetlist2="getlist" />
     <DialogEditInfo :flag.sync="dialog_Info_edit" :id="infoId" @Emitgetlist="getlist" />
 
   </div>

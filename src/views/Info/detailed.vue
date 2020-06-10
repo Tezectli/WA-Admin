@@ -1,6 +1,48 @@
 <template>
   <div>
-    <!-- <el-form :inline="true" :model="formInline" class="demo-form-inline"> -->
+    <el-form :inline="true" class="demo-form-inline">
+      <el-row :gutter="80">
+        <el-col :span="10">
+          <div class="block2">
+            <span class="demonstration"></span>
+            <el-image :src="src" :fit="fit"></el-image>
+          </div>
+        </el-col>
+        <div class="el">
+          <el-col :span="14">
+            <div class="black-space-30"></div>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="商品ID" label-width="70px" class="el iu">
+              <el-input v-model="form.t_id" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="商品名称" label-width="70px" class="el iu">
+              <el-input v-model="form.t_name" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="商品价格" label-width="70px" class="el iu">
+              <el-input v-model="form.t_nadu" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="商品库存" label-width="70px" class="el iu">
+              <el-input v-model="form.t_fenzu" autocomplete="off" style="width:200px" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="14">
+            <el-form-item label="商品详情" label-width="70px " class="el iu">
+              <el-input v-model="form.t_info" autocomplete="off" style="width:400px" :disabled="true">
+              </el-input>
+            </el-form-item>
+          </el-col>
+        </div>
+      </el-row>
+    </el-form>
+  </div>
+  <!-- <div>
     <el-form :inline="true" class="demo-form-inline">
       <el-row :gutter="80">
         <el-col :span="10">
@@ -42,7 +84,7 @@
         </div>
       </el-row>
     </el-form>
-  </div>
+  </div> -->
 </template>
 <script>
 import { reactive, ref, watchEffect, onMounted } from "@vue/composition-api";

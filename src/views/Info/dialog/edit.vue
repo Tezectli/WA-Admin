@@ -7,6 +7,32 @@
           <el-option label="选项二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="商品名称" :label-width="formLabelWidth">
+        <el-input v-model="form.t_name" autocomplete="off" style="width:200px"></el-input>
+      </el-form-item>
+      <el-form-item label="商品价格" :label-width="formLabelWidth">
+        <el-input v-model="form.t_nandu" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="商品库存" :label-width="formLabelWidth">
+        <el-input v-model="form.t_fenzu" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="商品详情" :label-width="formLabelWidth">
+        <el-input type="textarea" v-model="form.t_info" autocomplete="off"></el-input>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="close">取 消</el-button>
+      <el-button type="primary" @click="submit" :loading="submitLoding">确 定</el-button>
+    </div>
+  </el-dialog>
+  <!-- <el-dialog title="修改" :visible.sync="dialog_Info_flag" width="580px" @close="close" @opened="openDialog">
+    <el-form :model="form" ref="addInfoForm">
+      <el-form-item label="分组选项" :label-width="formLabelWidth">
+        <el-select v-model="form.region" placeholder="请选择类别图标">
+          <el-option label="选项一" value="shanghai"></el-option>
+          <el-option label="选项二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="公司名称" :label-width="formLabelWidth">
         <el-input v-model="form.t_name" autocomplete="off" style="width:200px"></el-input>
       </el-form-item>
@@ -24,10 +50,16 @@
       <el-button @click="close">取 消</el-button>
       <el-button type="primary" @click="submit" :loading="submitLoding">确 定</el-button>
     </div>
-  </el-dialog>
+  </el-dialog> -->
 </template>
 <script>
-import { AddInfo, GetList, EditInfo } from "@/api/news";
+import {
+  AddInfo,
+  GetList,
+  EditInfo,
+  GetuserList,
+  EdituserInfo
+} from "@/api/news";
 import { reactive, ref, watchEffect } from "@vue/composition-api";
 import qs from "qs";
 export default {
@@ -39,6 +71,10 @@ export default {
       default: false
     },
     id: {
+      type: String,
+      default: ""
+    },
+    useridenty: {
       type: String,
       default: ""
     }
@@ -75,8 +111,12 @@ export default {
     };
     const openDialog = () => {
       // data.categoryOption = props.category;
-      getInfo();
+      if (props.useridenty == "2") getuserInfo();
+      else getInfo();
       console.log(props.id);
+      console.log("用户");
+
+      console.log(props.useridenty);
     };
     const getInfo = () => {
       let requestData = qs.stringify({
@@ -85,6 +125,21 @@ export default {
         id: props.id
       });
       GetList(requestData).then(response => {
+        console.log(response.data.list[0]);
+        let responseData = response.data.list[0];
+        form.t_name = responseData.SPMC;
+        form.t_nandu = responseData.SPJG;
+        form.t_fenzu = responseData.SPKC;
+        form.t_info = responseData.SPXQ;
+      });
+    };
+    const getuserInfo = () => {
+      let requestData = qs.stringify({
+        pageNumber: 1,
+        pageSize: 1,
+        id: props.id
+      });
+      GetuserList(requestData).then(response => {
         console.log(response.data.list[0]);
         let responseData = response.data.list[0];
         form.t_name = responseData.SPMC;
@@ -125,20 +180,39 @@ export default {
         return false;
       }
       submitLoding.value = true;
-      EditInfo(postData)
-        .then(response => {
-          console.log(response.data);
-          submitLoding.value = false;
-          // root.$refs.addInfoForm.resetFields();
-          //两种刷新数据的方式
-          //1.暴力取数据刷新
-          //2.返回列表，手动修改指定的数据
-          emit("Emitgetlist");
-          close();
-        })
-        .catch(error => {
-          submitLoding.value = false;
-        });
+      if (props.useridenty == "2") {
+        console.log("可以进行用户修改");
+
+        EdituserInfo(postData)
+          .then(response => {
+            console.log(response.data);
+            submitLoding.value = false;
+            // root.$refs.addInfoForm.resetFields();
+            //两种刷新数据的方式
+            //1.暴力取数据刷新
+            //2.返回列表，手动修改指定的数据
+            emit("Emitgetlistuser");
+            close();
+          })
+          .catch(error => {
+            submitLoding.value = false;
+          });
+      } else {
+        EditInfo(postData)
+          .then(response => {
+            console.log(response.data);
+            submitLoding.value = false;
+            // root.$refs.addInfoForm.resetFields();
+            //两种刷新数据的方式
+            //1.暴力取数据刷新
+            //2.返回列表，手动修改指定的数据
+            emit("Emitgetlist");
+            close();
+          })
+          .catch(error => {
+            submitLoding.value = false;
+          });
+      }
     };
     return {
       dialog_Info_flag,
@@ -148,7 +222,8 @@ export default {
       submit,
       submitLoding,
       resetForm,
-      openDialog
+      openDialog,
+      getuserInfo
     };
   }
   //   watch: {
