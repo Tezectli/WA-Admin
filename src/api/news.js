@@ -91,3 +91,14 @@ export function Aboutuslist(data) {
         data
     })
 }
+
+/**
+ * 关于我们列表修改
+ */
+export function EditAboutuslist(data) {
+    return service.request({
+        method: "post",
+        url: "OF_editabout",
+        data
+    })
+}

@@ -10,11 +10,14 @@
       <el-step title="步骤 3" description="这段就没那么长了"></el-step>
     </el-steps> -->
     <div class="block2">
-      <el-timeline>
-        <el-timeline-item placement="top" v-for="(activity, index) in activities" :key="index"
-          :timestamp="activity.timestamp">
+      <el-timeline v-model="table_data.item">
+        <el-timeline-item placement="top" v-for="(item, index) in table_data.item" :key="index"
+          :timestamp="item.SPTIME">
           <el-card>
-            <h4> {{activity.content}}</h4>
+            <h4> {{item.SPPIC}} <el-button size="mini" @click="editInfo(index)" class="pull-right-btton">编辑
+              </el-button>
+            </h4>
+
             <!-- <p>{{activity.content}}</p> -->
           </el-card>
         </el-timeline-item>
@@ -32,8 +35,8 @@
         </el-timeline-item> -->
       </el-timeline>
     </div>
-    <DialogInfo :flag.sync="dialog_Info" @emitgetlist2="getlist" />
-    <DialogEditInfo :flag.sync="dialog_Info_edit" :id="infoId" @Emitgetlist="getlist" />
+    <!-- <DialogInfo :flag.sync="dialog_Info" @emitgetlist2="getlist" /> -->
+    <DialogEditInfoabout :flag.sync="dialog_Info_edit" :id="infoId" @Emitgetlistabout="getlist" />
 
   </div>
 </template>
@@ -42,11 +45,11 @@ import qs from "qs";
 import { AddInfo, GetList, DeleteInfo, Aboutuslist } from "@/api/news";
 import { global } from "@/utils/global_V3.0.js";
 import DialogInfo from "./dialog/info";
-import DialogEditInfo from "./dialog/edit";
+import DialogEditInfoabout from "./dialog/editabout";
 import { reactive, ref, watchEffect, onMounted } from "@vue/composition-api";
 export default {
   name: "aboutus",
-  components: { DialogInfo, DialogEditInfo },
+  components: { DialogInfo, DialogEditInfoabout },
   setup(props, { root }) {
     //非reative数据
     //弹窗
@@ -59,7 +62,7 @@ export default {
     const total = ref(0);
     const infoId = ref("");
     const infoId2 = ref("");
-    const activities = reactive([""]);
+    // const activities = reactive();
     //分页数据
     const handleSizeChange = val => {
       // console.log(111111);
@@ -107,9 +110,9 @@ export default {
         id: infoId2.value
       });
     };
-    const editInfo = SPID => {
-      console.log(SPID);
-      infoId.value = SPID;
+    const editInfo = index => {
+      console.log(index);
+      infoId.value = index;
       dialog_Info_edit.value = true;
     };
     const deleteAll = () => {
@@ -151,8 +154,10 @@ export default {
       });
       Aboutuslist(postData).then(response => {
         let data = response.data.list;
-        activities.item = data;
-        console.log(activities);
+        table_data.item = data;
+        console.log(table_data.item[0].SPID);
+        console.log(data);
+
         total.value = parseInt(response.data.total);
         // console.log(typeof total.value);
       });
@@ -192,6 +197,7 @@ export default {
     });
     onMounted(() => {
       getlist();
+      // console.log(table_data);
     });
     return {
       category_value,
@@ -213,8 +219,7 @@ export default {
       editInfo,
       infoId,
       infoId2,
-      detailed,
-      activities
+      detailed
     };
   }
 };
@@ -246,5 +251,9 @@ export default {
 .bc-gray {
   background-color: rgb(130, 174, 182) !important;
   height: 30px;
+}
+.pull-right-btton {
+  float: right;
+  margin-top: -7px;
 }
 </style>

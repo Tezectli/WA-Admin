@@ -8,7 +8,7 @@
       <el-form :model="ruleForm" status-icon :rules="rules" ref="loginForm" class="login-form" size="medium">
 
         <el-form-item prop="username" class="item-form">
-          <label for="mail">邮箱</label>
+          <label for="mail">账号</label>
           <el-input type="text" v-model="ruleForm.username" autocomplete="off" id="mail"></el-input>
         </el-form-item>
 
@@ -20,7 +20,8 @@
 
         <el-form-item prop="passwords" class="item-form" v-show="model === 'register'">
           <label>重复密码</label>
-          <el-input type="text" v-model="ruleForm.passwords" autocomplete="off" minlength="6" maxlength="20"></el-input>
+          <el-input type="password" v-model="ruleForm.passwords" autocomplete="off" minlength="6" maxlength="20">
+          </el-input>
         </el-form-item>
 
         <el-form-item prop="code" class="item-form">
@@ -73,9 +74,10 @@ export default {
     };
     //下为验证用户名是否为邮箱的方法：validateusername
     let validateusername = (rule, value, callback) => {
-      // if (value === "") {
-      //   callback(new Error("请输入用户名"));
-      // } else if (validataEmail(value)) {
+      if (value === "") {
+        callback(new Error("请输入用户名"));
+      }
+      // else if (validataEmail(value)) {
       //   callback(new Error("用户名格式错误"));
       // } else {
       callback();
