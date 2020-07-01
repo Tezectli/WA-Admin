@@ -30,7 +30,7 @@
               <el-input v-model.number="ruleForm.code" minlength="6" maxlength="6"></el-input>
             </el-col>
             <el-col :span="9">
-              <el-button type="success" class="block" @click="getsms()">获取验证码</el-button>
+              <el-button type="warning" class="block" @click="getsms()">获取验证码</el-button>
             </el-col>
           </el-row>
         </el-form-item>
@@ -188,7 +188,7 @@ export default {
           console.log("login good!!!");
           root.timer = setTimeout(() => {
             root.$router.push({
-              name: "Console"
+              name: "mainpage"
             });
             console.log("ok");
           }, 1000);
@@ -292,9 +292,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 #login {
-  height: 89vh;
-  background-color: #344a5f;
+  height: 100vh;
+  // background-color: #344a5f;
   padding-top: 11vh;
+  background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/loginbg2.png);
+  background-size: cover;
 }
 .login-wrap {
   width: 330px;
@@ -311,7 +313,7 @@ export default {
     border-radius: 2px;
   }
   .current {
-    background-color: rgb(86, 168, 179);
+    background-color: #f9b754;
   }
 }
 .login-form {

@@ -294,7 +294,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #login {
-  height: 89vh;
+  height: 100vh;
   background-color: #344a5f;
   padding-top: 11vh;
 }

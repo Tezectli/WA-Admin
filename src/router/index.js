@@ -30,6 +30,73 @@ const routes = [{
             import ("../views/Login/index.vue")
 
     },
+    //-----------以下为商城的router-------------//
+    {
+        path: "/mainpage",
+        name: "mainpage",
+        //component: () => import("../views/Login/index.vue")
+        hidden: true,
+        meta: {
+            name: "首页",
+            title: "OfferClear-欢迎"
+        },
+        component: () =>
+            import ("../views/WAShop/index.vue")
+
+    },
+    {
+        path: "/loginShop",
+        name: "LoginShop",
+        //component: () => import("../views/Login/index.vue")
+        hidden: true,
+        meta: {
+            name: "WA登录",
+            title: "WA登录"
+        },
+        component: () =>
+            import ("../views/Loginshop/index.vue")
+
+    },
+    {
+        path: "/aboutWA",
+        name: "AboutWA",
+        //component: () => import("../views/Login/index.vue")
+        hidden: true,
+        meta: {
+            name: "关于我们",
+            title: "WA-关于我们"
+        },
+        component: () =>
+            import ("../views/WAShop/aboutWA.vue")
+
+    },
+    {
+        path: "/WAproduct",
+        name: "WAproduct",
+        //component: () => import("../views/Login/index.vue")
+        hidden: true,
+        meta: {
+            name: "品牌概念",
+            title: "WA-品牌概念"
+        },
+        component: () =>
+            import ("../views/WAShop/WA.vue")
+
+    },
+    {
+        path: "/womenclothList",
+        name: "womenclothList",
+        //component: () => import("../views/Login/index.vue")
+        hidden: true,
+        meta: {
+            name: "womenclothList",
+            title: "WA女装列表"
+        },
+        component: () =>
+            import ("../views/WAShop/womenclothList.vue")
+
+    },
+    //商城router结束-----------------------------------------
     {
         path: "/console",
         name: "Console",
@@ -185,4 +252,6 @@ const router = new VueRouter({
     routes
 });
 
+
 export default router;
+// export default shoprouter;
