@@ -96,6 +96,32 @@ const routes = [{
             import ("../views/WAShop/womenclothList.vue")
 
     },
+    {
+        path: "/womenClouthFirst",
+        name: "womenClouthFirst",
+        //component: () => import("../views/Login/index.vue")
+        hidden: true,
+        meta: {
+            name: "womenClouthFirst",
+            title: "WA女装导购"
+        },
+        component: () =>
+            import ("../views/WAShop/womenClouthFirst.vue")
+
+    },
+    {
+        path: "/womenClouthSecond",
+        name: "womenClouthSecond",
+        //component: () => import("../views/Login/index.vue")
+        hidden: true,
+        meta: {
+            name: "womenClouthSecond",
+            title: "WA女装分类"
+        },
+        component: () =>
+            import ("../views/WAShop/womenClouthSecond.vue")
+
+    },
     //商城router结束-----------------------------------------
     {
         path: "/console",

@@ -10,10 +10,10 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="paddingleftlist">
-          <b-nav-item href="http://localhost:8081/#/mainpage">首页</b-nav-item>
-          <b-nav-item href="http://localhost:8081/#/womenclothList">女装</b-nav-item>
-          <b-nav-item href="http://localhost:8081/#/aboutWA">关于我们</b-nav-item>
-          <b-nav-item href="http://localhost:8081/#/WAproduct">品牌概念</b-nav-item>
+          <b-nav-item href="http://192.168.1.105:8081/#/mainpage">首页</b-nav-item>
+          <b-nav-item href="http://192.168.1.105:8081/#/womenClouthFirst">女装</b-nav-item>
+          <b-nav-item href="http://192.168.1.105:8081/#/aboutWA">关于我们</b-nav-item>
+          <b-nav-item href="http://192.168.1.105:8081/#/WAproduct">品牌概念</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->

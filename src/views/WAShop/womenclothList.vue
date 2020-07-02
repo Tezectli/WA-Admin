@@ -4,20 +4,30 @@
     <div class="toppic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/banner4.png" class="img"></div>
     <!-- <div class="toppic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/1-banner2.png" class="img"></div>
     <div class="middlepic wow fadeInUp"><img src="http://192.168.1.105:8080/Z_web/pic/WA/2-品牌概念2.png" class="img"></div> -->
-
-    <div>
-      <b-card title="Card Title" img-src="https://picsum.photos/600/300/?image=25" img-alt="Image" img-top tag="article"
-        style="max-width: 20rem;" class="mb-2">
+    <div class="titlepic2"></div>
+    <ul class="cardList wow fadeInUp">
+      <b-card :title="item.SPPIC" :img-src="item.SPPIC" img-alt="Image" img-top tag="article" style="max-width: 17rem;"
+        class="mb-2" v-for="(item, index) in table_data.item" :key="index">
         <b-card-text>
-          Some quick example text to build on the card title and make up the bulk of the card's content.
+          {{item.SPPIC}}
         </b-card-text>
 
-        <b-button href="#" variant="primary">Go somewhere</b-button>
+        <b-button href="#" variant="primary">立即购买</b-button>
       </b-card>
-    </div>
+    </ul>
   </div>
 </template>
 <script>
+import qs from "qs";
+import { AddInfo, GetList, DeleteInfo, Aboutuslist } from "@/api/news";
+import {
+  reactive,
+  ref,
+  watchEffect,
+  onMounted,
+  root
+} from "@vue/composition-api";
+import { global } from "@/utils/global_V3.0.js";
 import LayoutHeader from "./Components/nav";
 import LayoutBanner from "./Components/banner";
 import LayoutSecond from "./Components/secondlayout";
@@ -36,20 +46,50 @@ export default {
     LayoutFourth
   },
   setup(props, { root }) {
+    const total = ref(0);
     const menuStatus = computed(() => root.$store.state.app.isCollapse);
-    return {
-      menuStatus
-    };
-  },
-  mounted() {
-    let wow = new WOW.WOW({
-      boxClass: "wow",
-      animateClass: "animated",
-      offset: 0,
-      mobile: true,
-      live: true
+    const page = reactive({
+      pageNumber: 1,
+      pageSize: 5
     });
-    wow.init();
+    const table_data = reactive({
+      item: []
+    });
+    const getlist = () => {
+      let postData = qs.stringify({
+        // pageNumber: 1,
+        // pageSize: 5
+        pageNumber: page.pageNumber,
+        pageSize: page.pageSize
+      });
+      GetList(postData).then(response => {
+        let data = response.data.list;
+        table_data.item = data;
+        console.log(table_data.item[0].SPID);
+        console.log(data);
+
+        total.value = parseInt(response.data.total);
+        // console.log(typeof total.value);
+      });
+    };
+    onMounted(() => {
+      getlist();
+      let wow = new WOW.WOW({
+        boxClass: "wow",
+        animateClass: "animated",
+        offset: 0,
+        mobile: true,
+        live: true
+      });
+      wow.init();
+      // console.log(table_data);
+    });
+    return {
+      menuStatus,
+      page,
+      getlist,
+      table_data
+    };
   }
 };
 </script>
@@ -68,10 +108,10 @@ export default {
 }
 .titlepic2 {
   /* background: rgb(151, 33, 33); */
-  width: 294px;
-  height: 55px;
-  margin: 30px auto 10px auto;
-  background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/新品上市.png);
+  width: 192px;
+  height: 45px;
+  margin: 30px auto 20px auto;
+  background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/部分商品.png);
   background-size: cover;
 }
 .footerm {
@@ -88,8 +128,7 @@ export default {
   text-align: center;
   justify-content: center;
 }
-h3 {
-}
+
 p {
   display: block;
   margin-top: 5px;
@@ -110,6 +149,41 @@ p {
   background-repeat: no-repeat;
   background-size: 100%;
 }
+.cardList {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  /* background-color: rgb(238, 69, 69); */
+  flex-wrap: wrap;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  text-align: left;
+}
+.cardList::after {
+  content: "";
+  width: 68%;
+  border: 1px solid transparent;
+}
+.card-img,
+.card-img-top {
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  height: 180px;
+}
+.mb-2,
+.my-2 {
+  margin-bottom: 2.5rem !important;
+}
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+  /* width: 98%; */
+  float: right;
+  background-color: #bf5127a1;
+  border: none;
+}
+
 @media (max-width: 500px) {
   .middlepic {
     text-align: center;
