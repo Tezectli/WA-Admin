@@ -12,8 +12,9 @@
         <b-navbar-nav class="paddingleftlist">
           <b-nav-item href="http://192.168.1.105:8081/#/mainpage">首页</b-nav-item>
           <b-nav-item href="http://192.168.1.105:8081/#/womenClouthFirst">女装</b-nav-item>
+          <b-nav-item href="http://192.168.1.105:8081/#/menClouthFirst">男装</b-nav-item>
           <b-nav-item href="http://192.168.1.105:8081/#/aboutWA">关于我们</b-nav-item>
-          <b-nav-item href="http://192.168.1.105:8081/#/WAproduct">品牌概念</b-nav-item>
+          <b-nav-item href="http://192.168.1.105:8081/#/WXList">微信关注</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -35,7 +36,7 @@
             <template v-slot:button-content>
               <em>{{username}}</em>
             </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
+            <b-dropdown-item href="http://192.168.1.105:8081/#/Profile">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>

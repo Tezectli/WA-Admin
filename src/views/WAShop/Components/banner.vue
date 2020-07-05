@@ -1,15 +1,15 @@
 <template>
   <div id="mtop">
-    <b-carousel id="carousel-1" v-model="slide" :interval="5000" controls indicators background="#ababab"
+    <b-carousel id="carousel-1" v-model="slide" :interval="3000" controls indicators background="#ababab"
       img-width="1920" img-height="1080" style="text-shadow: 1px 1px 2px #333;" @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd">
       <!-- Text slides with image -->
-      <b-carousel-slide caption="欢迎光临W&A服饰商城" text="Nulla vitae elit libero, a pharetra augue mollis interdum."
+      <b-carousel-slide caption="欢迎光临W&A服饰商城" text="Welcome to W&A Project"
         img-src="http://192.168.1.105:8080/Z_web/pic/WA/banner1.png"></b-carousel-slide>
 
       <!-- Slides with custom text -->
       <b-carousel-slide img-src="http://192.168.1.105:8080/Z_web/pic/WA/banner5.png">
-        <h1>Hello world!</h1>
+        <h4>Welcome!</h4>
       </b-carousel-slide>
 
       <!-- Slides with image only -->

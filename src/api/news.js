@@ -10,6 +10,16 @@ export function GetList(data) {
     })
 }
 /**
+ * 男装列表
+ */
+export function GetListMan(data) {
+    return service.request({
+        method: "post",
+        url: "OF_mansplist",
+        data
+    })
+}
+/**
  * 新增
  */
 export function AddInfo(data) {
@@ -99,6 +109,16 @@ export function EditAboutuslist(data) {
     return service.request({
         method: "post",
         url: "OF_editabout",
+        data
+    })
+}
+/**
+ * 获取微信用户信息
+ */
+export function WX_userGet(data) {
+    return service.request({
+        method: "post",
+        url: "WX_user",
         data
     })
 }

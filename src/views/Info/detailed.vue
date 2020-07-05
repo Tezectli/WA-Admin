@@ -118,7 +118,7 @@ export default {
       resource: "",
       desc: ""
     });
-    const src = ref("http://localhost:8080/Z_web/pic/" + pic);
+    const src = pic;
     const fit = ref("contain");
     onMounted(() => {
       form.t_name = name;

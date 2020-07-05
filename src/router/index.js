@@ -38,7 +38,7 @@ const routes = [{
         hidden: true,
         meta: {
             name: "首页",
-            title: "OfferClear-欢迎"
+            title: "WA-首页"
         },
         component: () =>
             import ("../views/WAShop/index.vue")
@@ -120,6 +120,103 @@ const routes = [{
         },
         component: () =>
             import ("../views/WAShop/womenClouthSecond.vue")
+
+    },
+    {
+        path: "/womenclothXQ",
+        name: "womenclothXQ",
+        //component: () => import("../views/Login/index.vue")
+        hidden: true,
+        meta: {
+            name: "womenclothXQ",
+            title: "WA女装详情"
+        },
+        component: () =>
+            import ("../views/WAShop/womenclothXQ.vue")
+
+    },
+    {
+        path: "/menClouthFirst",
+        name: "menClouthFirst",
+        hidden: true,
+        meta: {
+            name: "menClouthFirst",
+            title: "WA男装导购"
+        },
+        component: () =>
+            import ("../views/WAShop/menClouthFirst.vue")
+
+    },
+    {
+        path: "/menClouthFirst",
+        name: "menClouthFirst",
+        hidden: true,
+        meta: {
+            name: "menClouthFirst",
+            title: "WA男装导购"
+        },
+        component: () =>
+            import ("../views/WAShop/menClouthFirst.vue")
+
+    },
+    {
+        path: "/menClouthSecond",
+        name: "menClouthSecond",
+        hidden: true,
+        meta: {
+            name: "menClouthSecond",
+            title: "WA男装分类"
+        },
+        component: () =>
+            import ("../views/WAShop/menClouthSecond.vue")
+
+    },
+    {
+        path: "/menclothList",
+        name: "menclothList",
+        hidden: true,
+        meta: {
+            name: "menclothList",
+            title: "WA男装列表"
+        },
+        component: () =>
+            import ("../views/WAShop/menclothList.vue")
+
+    },
+    {
+        path: "/menclothXQ",
+        name: "menclothXQ",
+        hidden: true,
+        meta: {
+            name: "menclothXQ",
+            title: "WA男装详情"
+        },
+        component: () =>
+            import ("../views/WAShop/menclothXQ.vue")
+
+    },
+    {
+        path: "/Profile",
+        name: "Profile",
+        hidden: true,
+        meta: {
+            name: "Profile",
+            title: "个人中心"
+        },
+        component: () =>
+            import ("../views/WAShop/Profile.vue")
+
+    },
+    {
+        path: "/WXList",
+        name: "WXList",
+        hidden: true,
+        meta: {
+            name: "WXList",
+            title: "微信关注"
+        },
+        component: () =>
+            import ("../views/WAShop/WXList.vue")
 
     },
     //商城router结束-----------------------------------------

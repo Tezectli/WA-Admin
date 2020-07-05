@@ -71,3 +71,10 @@ body .el-table th.gutter {
     margin: 22px;
     display: block;
 }
+
+.el-date-editor .el-range-separator {
+    padding: 0 0px;
+    line-height: 32px;
+    width: 5%;
+    color: #303133;
+}

@@ -20,7 +20,8 @@
 
         <el-form-item prop="passwords" class="item-form" v-show="model === 'register'">
           <label>重复密码</label>
-          <el-input type="text" v-model="ruleForm.passwords" autocomplete="off" minlength="6" maxlength="20"></el-input>
+          <el-input type="password" v-model="ruleForm.passwords" autocomplete="off" minlength="6" maxlength="20">
+          </el-input>
         </el-form-item>
 
         <el-form-item prop="code" class="item-form">
@@ -235,7 +236,7 @@ export default {
       Register(postData)
         .then(Response => {
           console.log(Response);
-          alert("submitsuccess!");
+          // alert("submitsuccess!");
           toggleMenu(menuTab[0]);
         })
         .catch(error => {
@@ -295,8 +296,18 @@ export default {
   height: 100vh;
   // background-color: #344a5f;
   padding-top: 11vh;
-  background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/loginbg2.png);
+  background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/bgr.jpg);
   background-size: cover;
+}
+@media (max-width: 500px) {
+  #login {
+    height: 100vh;
+    // background-color: #344a5f;
+    padding-top: 11vh;
+    background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/bgr.jpg);
+    background-size: cover;
+    filter: brightness(1.2);
+  }
 }
 .login-wrap {
   width: 330px;

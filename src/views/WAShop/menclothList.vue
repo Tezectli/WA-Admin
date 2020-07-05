@@ -1,7 +1,7 @@
 <template>
   <div id="layout">
     <LayoutHeader />
-    <div class="toppic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/banner2.png" class="img"></div>
+    <div class="toppic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/mbanner3.png" class="img"></div>
     <!-- <div class="toppic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/1-banner2.png" class="img"></div>
     <div class="middlepic wow fadeInUp"><img src="http://192.168.1.105:8080/Z_web/pic/WA/2-品牌概念2.png" class="img"></div> -->
     <div class="titlepic2"></div>
@@ -25,7 +25,13 @@
 </template>
 <script>
 import qs from "qs";
-import { AddInfo, GetList, DeleteInfo, Aboutuslist } from "@/api/news";
+import {
+  AddInfo,
+  GetList,
+  DeleteInfo,
+  Aboutuslist,
+  GetListMan
+} from "@/api/news";
 import {
   reactive,
   ref,
@@ -78,7 +84,7 @@ export default {
         pageNumber: page.pageNumber,
         pageSize: page.pageSize
       });
-      GetList(postData).then(response => {
+      GetListMan(postData).then(response => {
         let data = response.data.list;
         table_data.item = data;
         // console.log(table_data.item[0].SPID);
@@ -93,7 +99,7 @@ export default {
       console.log("我是详情");
       console.log(item);
       root.$router.push({
-        name: "womenclothXQ",
+        name: "menclothXQ",
         query: {
           id: item.SPID,
           name: item.SPMC,
@@ -199,7 +205,7 @@ p {
 }
 .cardList::after {
   content: "";
-  width: 21%;
+  width: 70%;
   border: 1px solid transparent;
 }
 .card-img,
@@ -256,7 +262,7 @@ p {
     margin-bottom: 2.5rem !important;
     margin-right: 0;
   }
-  .check[data-v-a468ab02] {
+  .check[data-v-fcb78a32] {
     float: right;
     margin: 20px 51px !important;
     width: 350px;

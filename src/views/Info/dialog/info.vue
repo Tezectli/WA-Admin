@@ -106,6 +106,7 @@ export default {
       form.t_info = "";
     };
     const submit = () => {
+      //以下为提交信息模块
       console.log("submit方法激活");
       let requestData = {
         t_name: form.t_name,

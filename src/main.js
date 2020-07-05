@@ -13,7 +13,7 @@ import global from "@/utils/global.js"
 //引入icons里的全局组件
 import "./icons/index.js";
 import "./router/premit"
-import 'bootstrap/dist/js/bootstrap.js'
+// import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import animated from 'animate.css'

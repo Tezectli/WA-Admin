@@ -44,6 +44,9 @@ export default {
   height: 373vh;
   /*377*/
 }
+a {
+  text-decoration: none;
+}
 @media (max-width: 1688px) {
   #layout {
     height: 400vh;

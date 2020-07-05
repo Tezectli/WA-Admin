@@ -1,12 +1,11 @@
 <template>
   <div id="layout">
     <LayoutHeader />
-    <div class="toppic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/1-banner2.png" class="img"></div>
-    <a href="http://192.168.1.105:8081/#/WAproduct">
-      <div class="middlepic wow fadeInUp"><img src="http://192.168.1.105:8080/Z_web/pic/WA/1-联系我们3.png" class="img">
+    <div class="toppic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/mbanner2.png" class="img"></div>
+    <a href="http://192.168.1.105:8081/#/menclothList">
+      <div class="middlepic wow fadeInDown"><img src="http://192.168.1.105:8080/Z_web/pic/WA/男装2.png" class="img">
       </div>
     </a>
-    <!-- <div class="bottompic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/1-品牌概念-按钮2.png" class="img"></div> -->
   </div>
 </template>
 <script>
@@ -47,7 +46,7 @@ export default {
 </script>
 <style scoped>
 #layout {
-  height: 400vh;
+  height: 281vh;
   /* text-align: center; */
 }
 .titlepic {
@@ -95,8 +94,8 @@ p {
 }
 .middlepic {
   text-align: center;
-  margin: 40px auto 0px auto;
-  width: 40%;
+  margin: 50px auto 0px auto;
+  width: 50%;
   /* height: 2165px; */
   /* background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/1-联系我们3.png); */
   background-repeat: no-repeat;
@@ -105,15 +104,15 @@ p {
 @media (max-width: 500px) {
   .middlepic {
     text-align: center;
-    margin: 40px auto 0px auto;
-    width: 80%;
+    margin: 20px auto 0px auto;
+    width: 100%;
     /* height: 2165px; */
     /* background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/1-联系我们3.png); */
     background-repeat: no-repeat;
     background-size: 100%;
   }
   #layout {
-    height: 208vh;
+    height: 96vh;
     /* text-align: center; */
   }
 }

@@ -1,31 +1,51 @@
 <template>
   <div id="layout">
     <LayoutHeader />
-    <div class="toppic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/banner2.png" class="img"></div>
+    <div class="toppic"></div>
     <!-- <div class="toppic"><img src="http://192.168.1.105:8080/Z_web/pic/WA/1-banner2.png" class="img"></div>
     <div class="middlepic wow fadeInUp"><img src="http://192.168.1.105:8080/Z_web/pic/WA/2-品牌概念2.png" class="img"></div> -->
-    <div class="titlepic2"></div>
-    <ul class="cardList wow fadeInDown">
-      <b-card :title="item.SPMC" :img-src="item.SPPIC" img-alt="Image" img-top tag="article" style="max-width: 16rem;"
-        class="mb-2" v-for="(item, index) in table_data.item" :key="index">
-        <b-card-text>
-          {{item.SPXQ}}
-        </b-card-text>
-        <b-card-text class="text">
-          ￥{{item.SPJG}}.0
-        </b-card-text>
-        <b-button variant="primary" @click="detailed(item)">查看详情
-        </b-button>
+    <div class="titlepic2">
+      <h3>微信关注</h3>
+    </div>
+    <div class="cardList wow fadeInUp">
+      <b-card no-body class="overflow-hidden cardxq" v-for="item in table_data" :key="item">
+        <b-row no-gutters>
+          <b-col md="3">
+            <b-card-img :src="item.headimgurl" class="rounded-0"></b-card-img>
+          </b-col>
+          <b-col md="9">
+            <b-card-body :title="item.nickname">
+              <b-card-text>
+                openid: {{item.openid}}
+              </b-card-text>
+              语言: {{item.language}}
+              <b-card-text>
+                省份:{{item.province}}
+              </b-card-text>
+              <b-card-text>
+                国家:{{item.country}}
+              </b-card-text>
+              <b-button variant="primary">取消关注</b-button>
+            </b-card-body>
+          </b-col>
+        </b-row>
       </b-card>
-    </ul>
-    <el-pagination background layout="total,sizes,prev, pager, next,jumper" :total="total" :current-page="1"
+    </div>
+    <!-- <el-pagination background layout="total,sizes,prev, pager, next,jumper" :total="total" :current-page="1"
       :page-sizes="[8]" @size-change="handleSizeChange" @current-change="handleCurrentChange" class="check">
-    </el-pagination>
+    </el-pagination> -->
   </div>
 </template>
 <script>
 import qs from "qs";
-import { AddInfo, GetList, DeleteInfo, Aboutuslist } from "@/api/news";
+import {
+  AddInfo,
+  GetList,
+  DeleteInfo,
+  Aboutuslist,
+  GetListMan,
+  WX_userGet
+} from "@/api/news";
 import {
   reactive,
   ref,
@@ -56,7 +76,7 @@ export default {
     const menuStatus = computed(() => root.$store.state.app.isCollapse);
     const page = reactive({
       pageNumber: 1,
-      pageSize: 8
+      pageSize: 0
     });
     const table_data = reactive({
       item: []
@@ -78,14 +98,14 @@ export default {
         pageNumber: page.pageNumber,
         pageSize: page.pageSize
       });
-      GetList(postData).then(response => {
-        let data = response.data.list;
-        table_data.item = data;
+      WX_userGet(postData).then(response => {
+        let data = response;
+        table_data.item = data.data;
         // console.log(table_data.item[0].SPID);
-        console.log(data);
+        console.log(data.data);
         // console.log(total.value);
-        total.value = parseInt(response.data.total);
-        console.log(total.value);
+        // total.value = parseInt(response.data.total);
+        // console.log(total.value);
       });
     };
     //详情跳转
@@ -93,7 +113,7 @@ export default {
       console.log("我是详情");
       console.log(item);
       root.$router.push({
-        name: "womenclothXQ",
+        name: "menclothXQ",
         query: {
           id: item.SPID,
           name: item.SPMC,
@@ -131,7 +151,7 @@ export default {
 </script>
 <style scoped>
 #layout {
-  height: 281vh;
+  height: 50vh;
   /* text-align: center; */
 }
 .titlepic {
@@ -147,8 +167,9 @@ export default {
   width: 192px;
   height: 45px;
   margin: 40px auto 30px auto;
-  background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/部分商品.png);
-  background-size: cover;
+  text-align: center;
+  /* background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/部分商品.png);
+  background-size: cover; */
 }
 .footerm {
   /* position: absolute; */
@@ -169,12 +190,15 @@ p {
   display: block;
   margin-top: 5px;
 }
+.cardxq {
+  width: 77% !important;
+}
 .toppic {
   width: 100%;
   margin-top: 56px;
-  /* height: 749px; */
-  /* background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/1-banner.png);
-  background-size: 100%; */
+  height: 155px;
+  background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/bgr.jpg);
+  background-size: 100%;
 }
 .middlepic {
   text-align: center;
@@ -197,11 +221,11 @@ p {
   padding-bottom: 20px;
   text-align: left;
 }
-.cardList::after {
+/* .cardList::after {
   content: "";
-  width: 21%;
+  width: 70%;
   border: 1px solid transparent;
-}
+} */
 .card-img,
 .card-img-top {
   border-top-left-radius: calc(0.25rem - 1px);
@@ -256,10 +280,19 @@ p {
     margin-bottom: 2.5rem !important;
     margin-right: 0;
   }
-  .check[data-v-a468ab02] {
+  .check[data-v-fcb78a32] {
     float: right;
     margin: 20px 51px !important;
     width: 350px;
+  }
+  .btn[data-v-e9874ef8]:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    /* width: 98%; */
+    float: right;
+    background-color: #bf5127a1;
+    border: none;
+    margin-top: 0;
+    margin-bottom: 10px;
   }
 }
 .bottompic {
@@ -267,9 +300,10 @@ p {
   /* height: 1194px;
   background-image: url(http://192.168.1.105:8080/Z_web/pic/WA/1-品牌概念-按钮2.png); */
 }
-.img {
+/* .img {
   width: 100%;
-}
+  clip: rect(0, 0, 200px, 0);
+} */
 .text {
   color: #888888;
 }
@@ -287,5 +321,17 @@ p {
 .check {
   float: right;
   margin: 20px 253px !important;
+}
+p[data-v-e9874ef8] {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.btn[data-v-e9874ef8]:not(:disabled):not(.disabled) {
+  cursor: pointer;
+  /* width: 98%; */
+  float: right;
+  background-color: #bf5127a1;
+  border: none;
+  margin-top: 15px;
 }
 </style>

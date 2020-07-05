@@ -55,7 +55,8 @@ export default {
   }
 }
 .header-icon {
-  padding: 3px 32px;
+  // padding: 3px 32px;
+  padding: 0 32px;
   svg {
     font-size: 24px;
     cursor: pointer;
@@ -63,7 +64,8 @@ export default {
   }
 }
 .header-icon2 {
-  padding: 3px 20px;
+  // padding: 3px 20px;
+  padding: 0 20px;
   svg {
     font-size: 20px;
     cursor: pointer;

@@ -34,7 +34,15 @@ service.interceptors.response.use(function(response) {
         return response;
 
     }
-    if (data.resCode == 203) {
+    if (data.resCode == 199) {
+        //data.resCode == 203为原先code
+        // Message.success(data.message);
+        Message.error(data.message);
+        // return response;
+        return Promise.reject(data);
+
+    } else if (data) {
+        //data.resCode == 203为原先code
         // Message.success(data.message);
         return response;
 
